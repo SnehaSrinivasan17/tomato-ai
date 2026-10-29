@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "seed": 20261029,
+  "ood_seed": 20261030,
+  "rows": 15000,
+  "shifted_rows": 3000,
+  "parameters": {
+    "in_distribution": {
+      "reach_scale": 1.0,
+      "media_effect": 0.35,
+      "late_noise": 0.85,
+      "amplification_sigma": 0.8,
+      "shock_probability": 0.015,
+      "shock_scale": 60
+    },
+    "shifted": {
+      "reach_scale": 0.65,
+      "media_effect": 0.05,
+      "late_noise": 1.2,
+      "amplification_sigma": 1.15,
+      "shock_probability": 0.04,
+      "shock_scale": 95
+    }
+  },
+  "features": [
+    "followers_count",
+    "friends_count",
+    "listed_count",
+    "statuses_count",
+    "verified",
+    "account_age_days",
+    "hour_utc",
+    "weekday",
+    "is_reply",
+    "is_quote",
+    "text_length",
+    "hashtag_count",
+    "mention_count",
+    "has_media",
+    "has_url",
+    "first_hour_impressions",
+    "first_hour_likes",
+    "first_hour_replies",
+    "first_hour_retweets"
+  ],
+  "limitations": [
+    "All posts, authors, engagement and reference labels are fictional simulation outputs, not observed customer data.",
+    "Scores measure recovery of assumptions in this simulator, not performance on real social media or Indian customers.",
+    "Prediction is made after the first hour; it classifies eventual simulated spread, not a forecast of first-hour engagement.",
+    "Independent latent appeal, platform amplification, late noise and rare shocks remain unobserved by ML.",
+    "The shifted test is one specified stress scenario, not comprehensive evidence of real-world robustness.",
+    "Reference sentiment/topic labels come from templates and are not human-annotated ground truth.",
+    "The 5:1 missed-positive to false-alert cost is a prototype assumption; all responses still need human review."
+  ]
+}

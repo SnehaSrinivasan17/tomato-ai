@@ -1,0 +1,11 @@
+{
+  "model": "random_forest_leaf20",
+  "thresholds": {
+    "default": 0.5,
+    "f1_optimal": 0.1,
+    "f2_optimal": 0.1,
+    "operational": 0.14
+  },
+  "selection": "Highest validation average precision; ties broken by model name.",
+  "operational_rule": "Minimize validation 5*FN + FP; ties choose lower threshold."
+}

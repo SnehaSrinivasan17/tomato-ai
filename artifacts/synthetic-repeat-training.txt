@@ -1,0 +1,75 @@
+{
+  "selected": "logistic_C1.0",
+  "label_threshold": 43.0,
+  "operational_threshold": 0.18,
+  "splits": {
+    "train": {
+      "rows": 9000,
+      "users": 9000,
+      "start": "2026-01-01 00:33:16+00:00",
+      "end": "2026-02-24 08:31:51+00:00",
+      "positives": 910,
+      "nonzero_retweet_posts": 7592,
+      "prevalence": 0.10111111111111111
+    },
+    "validation": {
+      "rows": 3000,
+      "users": 3000,
+      "start": "2026-02-24 08:32:49+00:00",
+      "end": "2026-03-14 02:07:34+00:00",
+      "positives": 317,
+      "nonzero_retweet_posts": 2522,
+      "prevalence": 0.10566666666666667
+    },
+    "test": {
+      "rows": 3000,
+      "users": 3000,
+      "start": "2026-03-14 02:11:45+00:00",
+      "end": "2026-03-31 23:44:29+00:00",
+      "positives": 322,
+      "nonzero_retweet_posts": 2564,
+      "prevalence": 0.10733333333333334
+    },
+    "shifted_test": {
+      "rows": 3000,
+      "users": 3000,
+      "start": "2026-01-01 00:58:16+00:00",
+      "end": "2026-03-31 23:13:21+00:00",
+      "positives": 326,
+      "nonzero_retweet_posts": 2310,
+      "prevalence": 0.10866666666666666
+    }
+  },
+  "test": {
+    "precision": 0.3669064748201439,
+    "recall": 0.4751552795031056,
+    "f1": 0.4140730717185385,
+    "f2": 0.44868035190615835,
+    "balanced_accuracy": 0.68828712444162,
+    "roc_auc": 0.79049559558213,
+    "average_precision": 0.4009816546069866,
+    "brier": 0.08008163019782648,
+    "tn": 2414,
+    "fp": 264,
+    "fn": 169,
+    "tp": 153,
+    "prevalence": 0.10733333333333334,
+    "alert_rate": 0.139
+  },
+  "shifted_test": {
+    "precision": 0.25098039215686274,
+    "recall": 0.19631901840490798,
+    "f1": 0.22030981067125646,
+    "f2": 0.20525978191148173,
+    "balanced_accuracy": 0.5624452234881683,
+    "roc_auc": 0.6280898541281416,
+    "average_precision": 0.22015441817335052,
+    "brier": 0.09502110386884483,
+    "tn": 2483,
+    "fp": 191,
+    "fn": 262,
+    "tp": 64,
+    "prevalence": 0.10866666666666666,
+    "alert_rate": 0.085
+  }
+}

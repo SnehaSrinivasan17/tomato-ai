@@ -1,0 +1,11 @@
+{
+  "provisional": {
+    "LLM_GAP_Hinglish_delivery": [
+      "CS-102"
+    ],
+    "LLM_GAP_Hinglish_safety": [
+      "CR-SAFE-01"
+    ]
+  },
+  "human_verified": {}
+}

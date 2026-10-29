@@ -1,0 +1,120 @@
+{
+  "families": {
+    "xgboost": {
+      "status": "available",
+      "version": "2.0.2"
+    },
+    "lightgbm": {
+      "status": "available",
+      "version": "4.6.0"
+    },
+    "catboost": {
+      "status": "available",
+      "version": "1.2.10"
+    }
+  },
+  "searches": [
+    {
+      "model": "logistic",
+      "cv_ap": 0.3929250963761515,
+      "parameters": {
+        "model__class_weight": null,
+        "model__C": 10
+      },
+      "train_cv_gap": 0.02555504856699553
+    },
+    {
+      "model": "random_forest",
+      "cv_ap": 0.3902068280088978,
+      "parameters": {
+        "model__n_estimators": 150,
+        "model__min_samples_leaf": 15,
+        "model__max_features": "sqrt",
+        "model__max_depth": 10,
+        "model__class_weight": null
+      },
+      "train_cv_gap": 0.21111019114633894
+    },
+    {
+      "model": "hist_gradient",
+      "cv_ap": 0.3724338802085248,
+      "parameters": {
+        "model__min_samples_leaf": 50,
+        "model__max_leaf_nodes": 15,
+        "model__max_iter": 200,
+        "model__learning_rate": 0.025,
+        "model__l2_regularization": 20
+      },
+      "train_cv_gap": 0.20857441524679415
+    },
+    {
+      "model": "xgboost",
+      "cv_ap": 0.3846051974287238,
+      "parameters": {
+        "model__subsample": 0.7,
+        "model__scale_pos_weight": 1,
+        "model__reg_lambda": 1,
+        "model__n_estimators": 200,
+        "model__min_child_weight": 5,
+        "model__max_depth": 3,
+        "model__learning_rate": 0.025,
+        "model__colsample_bytree": 1
+      },
+      "train_cv_gap": 0.1505459623099723
+    },
+    {
+      "model": "lightgbm",
+      "cv_ap": 0.3800228375798167,
+      "parameters": {
+        "model__reg_lambda": 1,
+        "model__num_leaves": 7,
+        "model__n_estimators": 100,
+        "model__min_child_samples": 20,
+        "model__learning_rate": 0.05,
+        "model__class_weight": null
+      },
+      "train_cv_gap": 0.18852749254501255
+    },
+    {
+      "model": "catboost",
+      "cv_ap": 0.394046703923723,
+      "parameters": {
+        "model__learning_rate": 0.025,
+        "model__l2_leaf_reg": 30,
+        "model__iterations": 350,
+        "model__depth": 3,
+        "model__auto_class_weights": "None"
+      },
+      "train_cv_gap": 0.08542104362510727
+    }
+  ],
+  "folds": [
+    {
+      "train_rows": 2250,
+      "validation_rows": 2250,
+      "train_end": "2026-01-14 15:50:48+00:00",
+      "validation_start": "2026-01-14 15:55:50+00:00",
+      "overlapping_authors": 0
+    },
+    {
+      "train_rows": 4500,
+      "validation_rows": 2250,
+      "train_end": "2026-01-28 05:06:21+00:00",
+      "validation_start": "2026-01-28 05:08:29+00:00",
+      "overlapping_authors": 0
+    },
+    {
+      "train_rows": 6750,
+      "validation_rows": 2250,
+      "train_end": "2026-02-10 17:32:46+00:00",
+      "validation_start": "2026-02-10 17:40:41+00:00",
+      "overlapping_authors": 0
+    }
+  ],
+  "engineered_features": "log1p counts; smoothed engagement/impression rates, reach-normalized impressions and retweets, engagement shares, list/follower ratio, cyclic UTC hour and weekday.",
+  "authors_are_unique": true,
+  "cv_note": "All synthetic authors are unique, so author grouping is a defensive check rather than an independent repeated-author robustness test.",
+  "data_unchanged": true,
+  "target_unchanged": true,
+  "seed": 42
+}

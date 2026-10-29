@@ -1,0 +1,91 @@
+{
+  "documents": [
+    {
+      "filename": "01_Brand_Voice_and_Communication_Guidelines.docx",
+      "sha256": "f935c6e45357fb912c76e91b2f326c75a04d7d06afa666dbd9a8f923357f8349",
+      "tables": 0
+    },
+    {
+      "filename": "02_Customer_Service_and_Resolution_Policy.docx",
+      "sha256": "15dbc8fb7b0aee436c8f874dbd68fddd174a38ccf76faa3bb214efee26e91f12",
+      "tables": 0
+    },
+    {
+      "filename": "03_Crisis_Management_and_Escalation_Playbook.docx",
+      "sha256": "28e42eb6fdf9e777fcef6dc3b650e6731434b49952d9e6800b05228e685d7541",
+      "tables": 0
+    },
+    {
+      "filename": "04_Social_Media_Response_and_SLA_Policy.docx",
+      "sha256": "f26cd0bf08bf4665a50bfbd5f71077b59e320a39a51f1fdea5e1049f374bf637",
+      "tables": 0
+    },
+    {
+      "filename": "05_Approved_Response_Templates.docx",
+      "sha256": "9ceda2a52836f11360ca3298eb9e33b9967a7429d48dcff379d742d27605fc54",
+      "tables": 0
+    },
+    {
+      "filename": "06_Product_Service_and_FAQ_Knowledge_Base.docx",
+      "sha256": "f9eaa2e38d88de094d704da3179ce583459e301eebe6a32cf119427ccb409763",
+      "tables": 0
+    },
+    {
+      "filename": "07_AI_Governance_Retrieval_and_Decision_Policy.docx",
+      "sha256": "a877c3c297ab8bcca76c02bf9560cb18c27e3502fcab4e33367117c4cf4e5a89",
+      "tables": 0
+    }
+  ],
+  "document_sections": 54,
+  "total_records": 114,
+  "policy_records": 44,
+  "template_records": 70,
+  "duplicate_ids": [],
+  "duplicate_manifest_ids": 0,
+  "missing_manifest_ids": [],
+  "missing_document_ids": [],
+  "metadata_mismatches": [],
+  "missing_expected_ids": [],
+  "missing_source_ids": [],
+  "conflicts": [
+    {
+      "rule_a": "CS-REF-01",
+      "rule_b": "CR-SAFE-01",
+      "precedence": "CR-SAFE-01",
+      "reason": "Safety investigation precedes routine refund"
+    },
+    {
+      "rule_a": "SM-SLA-01",
+      "rule_b": "CR-PRIV-01",
+      "precedence": "CR-PRIV-01",
+      "reason": "Privacy incident overrides response target"
+    },
+    {
+      "rule_a": "AI-GATE-01",
+      "rule_b": "AR-101",
+      "precedence": "AI-GATE-01",
+      "reason": "Human approval overrides templates"
+    },
+    {
+      "rule_a": "AI-RAG-02",
+      "rule_b": "KB-101",
+      "precedence": "AI-RAG-02",
+      "reason": "Current policy overrides general FAQ"
+    },
+    {
+      "rule_a": "SM-102",
+      "rule_b": "SM-SLA-01",
+      "precedence": "",
+      "reason": "Unresolved proposed SLA: P2 60 minutes vs 2 hours; P3 4 vs 8 staffed hours.",
+      "unresolved": true
+    }
+  ],
+  "unresolved_conflict_ids": [
+    "AR-101"
+  ],
+  "approval": "All document policies proposed; template JSONL lacks approval metadata.",
+  "hierarchy": "# Policy precedence\n1. Applicable law and verified urgent safety procedures\n2. Approved active Tomato rules\n3. Authenticated current case facts\n4. Approved response templates\n5. FAQ guidance\n6. External industry benchmarks (nonbinding)\n\nWhen policies conflict, do not silently choose a convenient rule: abstain and escalate. P0/P1 require human approval.\n",
+  "scenario_count": 75,
+  "approved_operational_records": 0,
+  "ingestion_blocked": false
+}

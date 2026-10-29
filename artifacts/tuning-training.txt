@@ -1,0 +1,49 @@
+Tuning logistic
+Resuming completed CV logistic
+Tuning random_forest
+Resuming completed CV random_forest
+Tuning hist_gradient
+Resuming completed CV hist_gradient
+Tuning xgboost
+Resuming completed CV xgboost
+Tuning lightgbm
+Resuming completed CV lightgbm
+Tuning catboost
+{
+  "selected": "previous_logistic",
+  "threshold": 0.18,
+  "confirmation": {
+    "accuracy": 0.8703333333333333,
+    "precision": 0.3631578947368421,
+    "recall": 0.4842105263157895,
+    "f1": 0.4150375939849624,
+    "f2": 0.45394736842105265,
+    "balanced_accuracy": 0.6975380440050403,
+    "roc_auc": 0.7729882717844335,
+    "average_precision": 0.4338589896050716,
+    "brier": 0.06912997573499731,
+    "tn": 2473,
+    "fp": 242,
+    "fn": 147,
+    "tp": 138,
+    "prevalence": 0.095,
+    "alert_rate": 0.12666666666666668
+  },
+  "reused_test": {
+    "accuracy": 0.8556666666666667,
+    "precision": 0.3669064748201439,
+    "recall": 0.4751552795031056,
+    "f1": 0.4140730717185385,
+    "f2": 0.44868035190615835,
+    "balanced_accuracy": 0.68828712444162,
+    "roc_auc": 0.79049559558213,
+    "average_precision": 0.4009816546069866,
+    "brier": 0.08008163019782648,
+    "tn": 2414,
+    "fp": 264,
+    "fn": 169,
+    "tp": 153,
+    "prevalence": 0.10733333333333334,
+    "alert_rate": 0.139
+  }
+}

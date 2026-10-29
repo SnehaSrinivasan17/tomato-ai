@@ -1,0 +1,10 @@
+{
+  "quantile": 0.9,
+  "retweet_threshold": 2291.800000000001,
+  "rule": "Positive when final observed retweet_count >= training 90th percentile; all boundary ties positive.",
+  "prevalence": {
+    "train": 0.10024375380865326,
+    "validation": 0.13360739979445016,
+    "test": 0.17338709677419356
+  }
+}

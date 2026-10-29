@@ -1,0 +1,41 @@
+...                                                                      [100%]
+============================== warnings summary ===============================
+tests/test_display.py::DisplayTests::test_browser_payloads_use_supported_arrow_types
+tests/test_display.py::DisplayTests::test_browser_payloads_use_supported_arrow_types
+tests/test_display.py::DisplayTests::test_browser_payloads_use_supported_arrow_types
+tests/test_display.py::DisplayTests::test_browser_payloads_use_supported_arrow_types
+tests/test_display.py::DisplayTests::test_browser_payloads_use_supported_arrow_types
+tests/test_display.py::DisplayTests::test_browser_payloads_use_supported_arrow_types
+  C:\Users\sneha\AppData\Local\Programs\Python\Python311\Lib\site-packages\matplotlib\_fontconfig_pattern.py:88: PyparsingDeprecationWarning:
+  
+  'parseString' deprecated - use 'parse_string'
+
+tests/test_display.py::DisplayTests::test_browser_payloads_use_supported_arrow_types
+tests/test_display.py::DisplayTests::test_browser_payloads_use_supported_arrow_types
+tests/test_display.py::DisplayTests::test_browser_payloads_use_supported_arrow_types
+tests/test_display.py::DisplayTests::test_browser_payloads_use_supported_arrow_types
+tests/test_display.py::DisplayTests::test_browser_payloads_use_supported_arrow_types
+tests/test_display.py::DisplayTests::test_browser_payloads_use_supported_arrow_types
+  C:\Users\sneha\AppData\Local\Programs\Python\Python311\Lib\site-packages\matplotlib\_fontconfig_pattern.py:92: PyparsingDeprecationWarning:
+  
+  'resetCache' deprecated - use 'reset_cache'
+
+tests/test_display.py: 228 warnings
+tests/test_ml.py: 1022 warnings
+  C:\Users\sneha\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py:605: Pandas4Warning:
+  
+  is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+
+tests/test_display.py: 228 warnings
+tests/test_ml.py: 1022 warnings
+  C:\Users\sneha\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py:614: Pandas4Warning:
+  
+  is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+
+tests/test_ml.py: 110 warnings
+  C:\Users\sneha\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\algorithms.py:1710: Pandas4Warning:
+  
+  is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+3 passed, 2622 warnings in 25.60s

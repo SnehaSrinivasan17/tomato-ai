@@ -1,0 +1,14 @@
+{
+  "seed": 42,
+  "cohort": "reposts",
+  "python": "3.11.0",
+  "data_sha256": "cdafecf4fbbb9e3d3e2f79b2e9c7ed5743c7f92bccc81a9330d3289d22e42de8",
+  "versions": {
+    "numpy": "1.26.4",
+    "pandas": "3.0.0",
+    "scikit-learn": "1.2.2",
+    "joblib": "1.3.2",
+    "streamlit": "1.28.2",
+    "plotly": "6.5.2"
+  }
+}

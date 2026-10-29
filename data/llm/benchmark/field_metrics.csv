@@ -1,0 +1,9 @@
+field,accuracy,macro_precision,macro_recall,macro_f1,total_samples,correct_count,error_count
+sentiment,1.0,1.0,1.0,1.0,50,50,0
+topic,0.78,0.7958,0.7537,0.7515,50,39,11
+urgency,0.84,0.8049,0.8214,0.8033,50,42,8
+needs_reply,0.98,1.0,0.975,0.9873,50,49,1
+risk_flag,0.96,0.9657,0.9276,0.9389,50,48,2
+language,0.98,0.75,0.625,0.6667,50,49,1
+sarcasm,1.0,1.0,1.0,1.0,50,50,0
+human_review,0.96,0.9333,0.9333,0.9333,50,48,2

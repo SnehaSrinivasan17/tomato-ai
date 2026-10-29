@@ -1,0 +1,7 @@
+{
+  "source_rows": 57,
+  "historical_benchmark_rows": 50,
+  "quarantined_live_reference_rows": 7,
+  "human_verified_legacy_rows": 0,
+  "reason": "Live IDs absent from original benchmark comparisons; predicted labels are not ground truth."
+}

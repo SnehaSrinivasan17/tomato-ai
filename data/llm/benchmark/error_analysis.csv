@@ -1,0 +1,26 @@
+post_id,severity,field,reference_label,predicted_label,is_safety_risk,post_text
+TOM_002,MEDIUM,needs_reply,True,False,False,"Tomato delivery partner Raj just dropped off my sushi 15 minutes earlier than expected. Hot food, pristine packaging, top-notch service!"
+TOM_005,MEDIUM,topic,customer_support,delivery,False,Your delivery driver took a photo of my house and has been messaging my personal WhatsApp with creepy compliments. Take action immediately or I go to the police.
+TOM_010,MEDIUM,topic,customer_support,delivery,False,"Bhai 2 ghante se order pending dikha raha hai, customer care bot sirf canned replies de raha hai. Bhookh se bura haal hai!"
+TOM_010,HIGH,urgency,high,medium,False,"Bhai 2 ghante se order pending dikha raha hai, customer care bot sirf canned replies de raha hai. Bhookh se bura haal hai!"
+TOM_010,MEDIUM,language,hinglish,hi,False,"Bhai 2 ghante se order pending dikha raha hai, customer care bot sirf canned replies de raha hai. Bhookh se bura haal hai!"
+TOM_014,MEDIUM,topic,app_service,delivery,False,Another masterclass in logistics: live tracking shows the driver swimming across the lake to deliver my noodles. 🏊‍♂️🍜
+TOM_015,HIGH,urgency,high,critical,False,I requested no mushrooms due to severe dietary restriction and the box was stuffed with them. Incompetent restaurant and zero platform checks.
+TOM_015,HIGH,risk_flag,none,food_safety,False,I requested no mushrooms due to severe dietary restriction and the box was stuffed with them. Incompetent restaurant and zero platform checks.
+TOM_015,MEDIUM,human_review,False,True,False,I requested no mushrooms due to severe dietary restriction and the box was stuffed with them. Incompetent restaurant and zero platform checks.
+TOM_017,HIGH,urgency,medium,low,False,Our company wants to onboard 50 corporate accounts for daily employee lunch catering. Who can I contact from your B2B sales team?
+TOM_018,MEDIUM,topic,customer_support,delivery,False,Your driver threatened to physically assault me at my doorway when I refused to pay extra cash tip above the digital payment. Police complaint filed.
+TOM_019,MEDIUM,topic,delivery,food_quality,False,La comida llegó completamente fría y la sopa de mariscos derramada dentro de la bolsa plástica. Muy mala experiencia.
+TOM_019,HIGH,urgency,high,medium,False,La comida llegó completamente fría y la sopa de mariscos derramada dentro de la bolsa plástica. Muy mala experiencia.
+TOM_021,MEDIUM,topic,customer_support,food_quality,False,"Ordered dessert for our anniversary and Tomato added a free brownie and celebratory card. Such a sweet touch, made our evening! ❤️"
+TOM_034,MEDIUM,topic,general_inquiry,app_service,False,How do I change the registered mobile phone number associated with my Tomato account?
+TOM_036,MEDIUM,topic,customer_support,delivery,False,Delivery agent shouted racial slurs at my mother when she asked him to place the food on the porch table. Unacceptable behavior.
+TOM_036,HIGH,urgency,critical,high,False,Delivery agent shouted racial slurs at my mother when she asked him to place the food on the porch table. Unacceptable behavior.
+TOM_039,MEDIUM,topic,general_inquiry,billing,False,Does Tomato accept Apple Pay or Google Wallet for contactless payments?
+TOM_041,HIGH,urgency,critical,high,False,Driver drove dangerously fast on our private condo driveway and clipped a resident's pet. Security guards have detained him. Contact building management.
+TOM_041,CRITICAL,risk_flag,legal,none,True,Driver drove dangerously fast on our private condo driveway and clipped a resident's pet. Security guards have detained him. Contact building management.
+TOM_041,MEDIUM,human_review,True,False,False,Driver drove dangerously fast on our private condo driveway and clipped a resident's pet. Security guards have detained him. Contact building management.
+TOM_047,HIGH,urgency,high,medium,False,Customer service chat agent abruptly ended the session while I was still explaining my missing items. Abysmal support experience.
+TOM_048,MEDIUM,topic,app_service,customer_support,False,"Tomato database appears leaked online on forum; saw my full name, phone number, and home delivery address posted on pastebin."
+TOM_049,MEDIUM,topic,app_service,delivery,False,"Tomato has been my go-to meal delivery app all semester. Reliable, affordable, and accurate delivery estimates."
+TOM_050,HIGH,urgency,critical,medium,False,Received a notice from local municipal food safety department regarding pending compliance inspection for cloud kitchens on Tomato.

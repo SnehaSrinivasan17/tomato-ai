@@ -1,0 +1,14 @@
+{
+  "model": "logistic_original_C1.0",
+  "model_version": "spread_v1_5_20261028T201514Z_ab0e6e",
+  "thresholds": {
+    "default": 0.5,
+    "f1_optimal": 0.22,
+    "f2_optimal": 0.07,
+    "operational": 0.22
+  },
+  "selection": "Largest validation average precision; exact ties by model name ascending.",
+  "operational_rule": "Maximum validation F1 on 0.01\u20130.99 grid; exact ties choose higher threshold.",
+  "trained_at_utc": "2026-10-28T20:18:22.467894+00:00",
+  "phase": "1.5"
+}

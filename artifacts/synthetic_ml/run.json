@@ -1,0 +1,22 @@
+{
+  "seed": 42,
+  "simulation_seed": 20261029,
+  "source": "synthetic",
+  "cohort": "synthetic_food_delivery",
+  "python": "3.11.0",
+  "data_sha256": "d5b213fb5435d379d22b86eebfb877010d45b42b46b3f20089075eee8f0bc909",
+  "shifted_data_sha256": "7f82b22d83ed80ad9e34f71003b71600a64c3623ef25344cb86e79ef61b2eefd",
+  "versions": {
+    "numpy": "1.26.4",
+    "pandas": "3.0.0",
+    "scikit-learn": "1.2.2",
+    "joblib": "1.3.2",
+    "xgboost": "2.0.2",
+    "lightgbm": "4.6.0",
+    "catboost": "1.2.10"
+  },
+  "tuning_seed": 42,
+  "confirmation_seed": 20261031,
+  "confirmation_sha256": "1a26c6561394a8ee9867227f53fa1e266f764afde541a5a8470c4c9b8985ad87",
+  "search_iterations": 8
+}

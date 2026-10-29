@@ -1,0 +1,18 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "collection": "tomato_policies_v1",
+  "embedding_model": "BAAI/bge-m3",
+  "classification_prompt_sha256": "c8ab99afa5676f182bbb1b7d6bdf6b82a01128a9a1a1381728556ac80cbf59ee",
+  "generation_prompt_sha256": "dbdabf73472ca50a58609c4f5f6f38cf203301c0043197560a65d6785d780284",
+  "evaluation_post_ids": [
+    "syn-post-009438",
+    "syn-post-014178",
+    "syn-post-001240",
+    "syn-post-012531",
+    "LLM_GAP_Hindi_privacy",
+    "LLM_GAP_Hinglish_delivery",
+    "LLM_GAP_Hinglish_safety",
+    "RAG_TEST-006"
+  ],
+  "provisional_reference_sha256": "e2b5c0f2a0ff7df3f472653d2eb99bf0303654e7557f9907cd7636dc661f18f0"
+}

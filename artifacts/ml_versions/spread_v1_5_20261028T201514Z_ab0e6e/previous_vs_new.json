@@ -1,0 +1,46 @@
+{
+  "previous": {
+    "directory": "artifacts\\synthetic_ml",
+    "threshold": 0.18,
+    "metrics": {
+      "accuracy": 0.8556666666666667,
+      "precision": 0.3669064748201439,
+      "recall": 0.4751552795031056,
+      "f1": 0.4140730717185385,
+      "f2": 0.44868035190615835,
+      "balanced_accuracy": 0.68828712444162,
+      "roc_auc": 0.79049559558213,
+      "average_precision": 0.4009816546069866,
+      "brier": 0.08008163019782648,
+      "tn": 2414,
+      "fp": 264,
+      "fn": 169,
+      "tp": 153,
+      "prevalence": 0.10733333333333334,
+      "alert_rate": 0.139
+    }
+  },
+  "new": {
+    "version": "spread_v1_5_20261028T201514Z_ab0e6e",
+    "threshold": 0.22,
+    "metrics": {
+      "accuracy": 0.8733333333333333,
+      "precision": 0.40993788819875776,
+      "recall": 0.40993788819875776,
+      "f1": 0.40993788819875776,
+      "f2": 0.40993788819875776,
+      "balanced_accuracy": 0.6694947095960182,
+      "roc_auc": 0.79049559558213,
+      "average_precision": 0.4009816546069866,
+      "brier": 0.08008163019782648,
+      "tn": 2488,
+      "fp": 190,
+      "fn": 190,
+      "tp": 132,
+      "prevalence": 0.10733333333333334,
+      "alert_rate": 0.10733333333333334
+    }
+  },
+  "comparable": true,
+  "conditions": "Same original test posts, labels and target; operational thresholds may differ. Test was already inspected in earlier phases."
+}

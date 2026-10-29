@@ -1,0 +1,30 @@
+{
+  "data_sha256": "d5b213fb5435d379d22b86eebfb877010d45b42b46b3f20089075eee8f0bc909",
+  "feature_sha256": "9e6417fd74cece2c97b9298657f9fbb4f5e25897a4674c40faf0de414857bdb1",
+  "iterations": 8,
+  "seed": 42,
+  "folds": [
+    {
+      "train_rows": 2250,
+      "validation_rows": 2250,
+      "train_end": "2026-01-14 15:50:48+00:00",
+      "validation_start": "2026-01-14 15:55:50+00:00",
+      "overlapping_authors": 0
+    },
+    {
+      "train_rows": 4500,
+      "validation_rows": 2250,
+      "train_end": "2026-01-28 05:06:21+00:00",
+      "validation_start": "2026-01-28 05:08:29+00:00",
+      "overlapping_authors": 0
+    },
+    {
+      "train_rows": 6750,
+      "validation_rows": 2250,
+      "train_end": "2026-02-10 17:32:46+00:00",
+      "validation_start": "2026-02-10 17:40:41+00:00",
+      "overlapping_authors": 0
+    }
+  ],
+  "sklearn": "1.2.2"
+}

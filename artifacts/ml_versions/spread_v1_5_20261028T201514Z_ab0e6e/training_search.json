@@ -1,0 +1,104 @@
+{
+  "seed": 42,
+  "iterations": 8,
+  "folds": [
+    {
+      "train_rows": 2250,
+      "validation_rows": 2250,
+      "train_end": "2026-01-14 15:50:48+00:00",
+      "validation_start": "2026-01-14 15:55:50+00:00",
+      "overlapping_authors": 0
+    },
+    {
+      "train_rows": 4500,
+      "validation_rows": 2250,
+      "train_end": "2026-01-28 05:06:21+00:00",
+      "validation_start": "2026-01-28 05:08:29+00:00",
+      "overlapping_authors": 0
+    },
+    {
+      "train_rows": 6750,
+      "validation_rows": 2250,
+      "train_end": "2026-02-10 17:32:46+00:00",
+      "validation_start": "2026-02-10 17:40:41+00:00",
+      "overlapping_authors": 0
+    }
+  ],
+  "searches": [
+    {
+      "family": "logistic",
+      "cv_ap": 0.39444231768363136,
+      "params": {
+        "model__class_weight": null,
+        "model__C": 0.1
+      },
+      "train_cv_gap": 0.023589886814111116
+    },
+    {
+      "family": "random_forest",
+      "cv_ap": 0.3875749387970151,
+      "params": {
+        "model__n_estimators": 300,
+        "model__min_samples_leaf": 40,
+        "model__max_features": "sqrt",
+        "model__max_depth": 10,
+        "model__class_weight": null
+      },
+      "train_cv_gap": 0.10361770779365864
+    },
+    {
+      "family": "hist_gradient",
+      "cv_ap": 0.3722418731408654,
+      "params": {
+        "model__min_samples_leaf": 50,
+        "model__max_leaf_nodes": 15,
+        "model__max_iter": 200,
+        "model__learning_rate": 0.025,
+        "model__l2_regularization": 20
+      },
+      "train_cv_gap": 0.21566843230927352
+    },
+    {
+      "family": "xgboost",
+      "cv_ap": 0.3861589526934542,
+      "params": {
+        "model__subsample": 0.7,
+        "model__scale_pos_weight": 1,
+        "model__reg_lambda": 1,
+        "model__n_estimators": 200,
+        "model__min_child_weight": 5,
+        "model__max_depth": 3,
+        "model__learning_rate": 0.025,
+        "model__colsample_bytree": 1
+      },
+      "train_cv_gap": 0.15323159718680507
+    },
+    {
+      "family": "lightgbm",
+      "cv_ap": 0.38155670516655854,
+      "params": {
+        "model__reg_lambda": 1,
+        "model__num_leaves": 7,
+        "model__n_estimators": 100,
+        "model__min_child_samples": 20,
+        "model__learning_rate": 0.05,
+        "model__class_weight": null
+      },
+      "train_cv_gap": 0.19054789275005252
+    }
+  ],
+  "compatibility": {
+    "xgboost": {
+      "status": "available",
+      "version": "2.0.2"
+    },
+    "lightgbm": {
+      "status": "available",
+      "version": "4.6.0"
+    },
+    "catboost": {
+      "status": "available",
+      "version": "1.2.10"
+    }
+  }
+}

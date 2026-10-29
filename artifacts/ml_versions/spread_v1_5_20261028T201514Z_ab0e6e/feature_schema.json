@@ -1,0 +1,97 @@
+{
+  "source": "synthetic",
+  "features": [
+    "followers_count",
+    "friends_count",
+    "listed_count",
+    "statuses_count",
+    "verified",
+    "account_age_days",
+    "hour_utc",
+    "weekday",
+    "is_reply",
+    "is_quote",
+    "text_length",
+    "hashtag_count",
+    "mention_count",
+    "has_media",
+    "has_url",
+    "first_hour_impressions",
+    "first_hour_likes",
+    "first_hour_replies",
+    "first_hour_retweets"
+  ],
+  "bounded": {
+    "hour_utc": [
+      0,
+      23
+    ],
+    "weekday": [
+      0,
+      6
+    ],
+    "verified": [
+      0,
+      1
+    ],
+    "is_reply": [
+      0,
+      1
+    ],
+    "is_quote": [
+      0,
+      1
+    ],
+    "has_media": [
+      0,
+      1
+    ],
+    "has_url": [
+      0,
+      1
+    ]
+  },
+  "defaults": {
+    "followers_count": 311.0,
+    "friends_count": 221.0,
+    "listed_count": 1.0,
+    "statuses_count": 1123.5,
+    "verified": 0.0,
+    "account_age_days": 3032.0,
+    "hour_utc": 12.0,
+    "weekday": 3.0,
+    "is_reply": 0.0,
+    "is_quote": 0.0,
+    "text_length": 104.0,
+    "hashtag_count": 0.0,
+    "mention_count": 1.0,
+    "has_media": 0.0,
+    "has_url": 0.0,
+    "first_hour_impressions": 61.0,
+    "first_hour_likes": 2.0,
+    "first_hour_replies": 0.0,
+    "first_hour_retweets": 0.0
+  },
+  "feature_order": [
+    "followers_count",
+    "friends_count",
+    "listed_count",
+    "statuses_count",
+    "verified",
+    "account_age_days",
+    "hour_utc",
+    "weekday",
+    "is_reply",
+    "is_quote",
+    "text_length",
+    "hashtag_count",
+    "mention_count",
+    "has_media",
+    "has_url",
+    "first_hour_impressions",
+    "first_hour_likes",
+    "first_hour_replies",
+    "first_hour_retweets"
+  ],
+  "engineering_version": "EngagementFeaturesV15 or original log-only baseline; serialized in model pipeline"
+}

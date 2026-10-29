@@ -1,0 +1,17 @@
+{
+  "seed": 42,
+  "simulation_seed": 20261029,
+  "source": "synthetic",
+  "cohort": "synthetic_food_delivery",
+  "python": "3.11.0",
+  "data_sha256": "d5b213fb5435d379d22b86eebfb877010d45b42b46b3f20089075eee8f0bc909",
+  "shifted_data_sha256": "7f82b22d83ed80ad9e34f71003b71600a64c3623ef25344cb86e79ef61b2eefd",
+  "versions": {
+    "numpy": "1.26.4",
+    "pandas": "3.0.0",
+    "scikit-learn": "1.2.2",
+    "joblib": "1.3.2",
+    "streamlit": "1.28.2",
+    "plotly": "6.5.2"
+  }
+}

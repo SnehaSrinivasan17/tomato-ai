@@ -1,0 +1,29 @@
+{
+  "provisional": {
+    "syn-post-009438": [
+      "CS-102"
+    ],
+    "syn-post-014178": [
+      "CS-REF-01"
+    ],
+    "syn-post-001240": [
+      "CR-SAFE-01"
+    ],
+    "syn-post-012531": [
+      "CS-PAY-02"
+    ],
+    "LLM_GAP_Hindi_privacy": [
+      "CR-PRIV-01"
+    ],
+    "LLM_GAP_Hinglish_delivery": [
+      "CS-102"
+    ],
+    "LLM_GAP_Hinglish_safety": [
+      "CR-SAFE-01"
+    ],
+    "RAG_TEST-006": [
+      "CR-PRIV-01"
+    ]
+  },
+  "human_verified": {}
+}

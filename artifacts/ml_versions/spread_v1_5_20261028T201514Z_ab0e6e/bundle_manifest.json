@@ -1,0 +1,33 @@
+{
+  "version": "spread_v1_5_20261028T201514Z_ab0e6e",
+  "files": {
+    "audit.json": "82ceac289bf3e5ee848a33e1b72234fdaef7b1865bc8c00caf1ddce5f909640d",
+    "calibration.csv": "77c90710ae88aa8028128f691fcf4871a782cf38e99b23086752a8b4aef1a759",
+    "class_distributions.csv": "2be6a6a4f4f7970a020a8d3c3f4b754044640327a96f90539f05eccf93463728",
+    "confusion_matrix.json": "b46195a281c03196b3a1b75e796b4cf58b6d977edb595ba30f4bd91918c2154e",
+    "cv_hist_gradient.csv": "53365343b7aef943c18c323ad78e59507eceb6e3cf94f0e5cba62fd84b8a2f50",
+    "cv_lightgbm.csv": "ccc99933ed19fdd5f850eb7e64a9f8d03afa098607d8fcd06d85e6cac8a8aff4",
+    "cv_logistic.csv": "7d773067fae6556e77726d152956dfc5792fe927b20e189f43f3423376b291e1",
+    "cv_random_forest.csv": "a2f9d9141c0e116c7d45bddf08dbcecea146ca6894958c4db281a913842a1ef8",
+    "cv_xgboost.csv": "145ef49727b8be58c9e25f14acf6b2b95171e62a7ff4e0459a83e88105c554de",
+    "error_analysis.csv": "778220025f1da27a28a624fa41e2e9f4975d1ab0c61f79f5b091071b5b2ed050",
+    "EVALUATION_REPORT.md": "5f62dfd72a1a0958b856f2f95d0b3e24aa0006043f7be5d924746e51b2e3cbc0",
+    "feature_importance.csv": "dee7b774868a6f93e1b4b389d3bfca454e4f3b92822596919e43a76b92330d81",
+    "feature_schema.json": "217380ac918b018ec061df9c3b50c7cd137ad192580603cfd80f06d8ef222d4f",
+    "freeze.json": "89c8d358092f61925d451e15a5314eca2fd27b3f8ac82fc6eb7be35aa69b92e5",
+    "held_out_predictions.csv": "55b46b0072fe66039b36a1947c0bc09f40ef74f32cdb4d434797b5b7c87d30ea",
+    "label_definition.json": "0e2dffc9a1d16f412baa6b36bfc591345931250a19b7f57357add9b8d1dc7aba",
+    "metrics.json": "1453a6d0debe32a62c11b7c230a78a97daaabae578d7451e68ba41f69de416aa",
+    "model.joblib": "7a0ce219226148ff03997997ff1be8fd965a9754d83a1a61a06eb7f5a233a8a3",
+    "model_comparison_validation.csv": "4ad02492edf3bdb3262e292cf332f579972ef37340ca07fddb9b43f43a712003",
+    "precision_recall_curve.csv": "1be6ce683e2d78245543d43720457bc5c8aec58d7ef744e560cf5f365c33c729",
+    "previous_vs_new.json": "6fe0bf8a1502b534145fecd1d6b6e6d33ca4a5b0ba19ab331e9453cd1a54d93c",
+    "roc_curve.csv": "ee1560ded07467a9d11b5ee2e510c228ecef125f289da25be8f4ee16be09fb68",
+    "run.json": "ca7b3d363b4259bb57bc19e9d36ccb4bfad4b2fa0916ad759d321dedb4e3d704",
+    "selection.json": "7ca07d5ca82abe9c52df181d544944abf7461ae44f153a27855ba217c5a3c5e9",
+    "split_manifest.csv": "7fbd6bf933a67c2fb671ff9f4162df366ea49bef178d340a6d32a66c1e44fc2c",
+    "status.json": "c4caa48ad429b2fa4e302c899e67b3500e8c431162b02a39e3c1ad9bfbcc3ae9",
+    "thresholds_validation.csv": "4f67d1ab410225d2159ffc2e9455959730014a20f5aed1585af03f44ab6eaa73",
+    "training_search.json": "50aa3ca0e8dc018eaee1240cef2ea8e7f2f644a1f13f47f9045034bd9c79e4f2"
+  }
+}

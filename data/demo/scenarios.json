@@ -1,0 +1,22 @@
+{
+  "praise": {
+    "post_id": "syn-post-004043",
+    "expected_behavior": "Positive low-risk monitoring; optional reply is not an obligation.",
+    "expectations_are_not_predictions": true
+  },
+  "missing_item": {
+    "post_id": "syn-post-009993",
+    "expected_behavior": "Routine complaint; retrieve policy and draft only if supported.",
+    "expectations_are_not_predictions": true
+  },
+  "allergy": {
+    "post_id": "LLM_SMOKE_allergy",
+    "expected_behavior": "Unverified safety allegation; escalate regardless of spread.",
+    "expectations_are_not_predictions": true
+  },
+  "hinglish_sarcasm": {
+    "post_id": "LLM_V3_Hinglish_11_0",
+    "expected_behavior": "Hinglish sarcasm, negative intent; policy-grounded complaint handling.",
+    "expectations_are_not_predictions": true
+  }
+}

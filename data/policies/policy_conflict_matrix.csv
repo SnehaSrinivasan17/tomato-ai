@@ -1,0 +1,5 @@
+rule_a,rule_b,precedence,reason
+CS-REF-01,CR-SAFE-01,CR-SAFE-01,Safety investigation precedes routine refund
+SM-SLA-01,CR-PRIV-01,CR-PRIV-01,Privacy incident overrides response target
+AI-GATE-01,AR-101,AI-GATE-01,Human approval overrides templates
+AI-RAG-02,KB-101,AI-RAG-02,Current policy overrides general FAQ

@@ -1,0 +1,11 @@
+{
+  "model": "logistic_C1.0",
+  "thresholds": {
+    "default": 0.5,
+    "f1_optimal": 0.22,
+    "f2_optimal": 0.07,
+    "operational": 0.18
+  },
+  "selection": "Highest validation average precision; ties broken by model name.",
+  "operational_rule": "Minimize validation 5*FN + FP; ties choose lower threshold."
+}

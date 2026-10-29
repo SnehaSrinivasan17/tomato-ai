@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "generation_prompt_version": "1.2.0",
+    "model": "openai/gpt-oss-120b",
+    "collection": "tomato_policies_v1",
+    "embedding_model": "BAAI/bge-m3",
+    "classification_prompt_sha256": "c8ab99afa5676f182bbb1b7d6bdf6b82a01128a9a1a1381728556ac80cbf59ee",
+    "generation_prompt_sha256": "91159bd89c219b2599b6e6a76bb57b9e84d7fcd1d09864199d696f62a02822cb",
+    "evaluation_post_ids": [
+      "LLM_GAP_Hinglish_delivery",
+      "LLM_GAP_Hinglish_safety"
+    ],
+    "provisional_reference_sha256": "20df7cbae1aa98ed1959c28cace3f2b0a4dc6e8359040ed5b7937639848e6561"
+  },
+  "dataset": "existing_policy_scenarios_plus_existing_ML_posts_and_Phase2_language_cases",
+  "provisional_retrieval": {
+    "n": 2,
+    "recall_at_3": 1.0,
+    "recall_at_5": 1.0,
+    "precision_at_5": 0.2,
+    "mrr": 0.41666666666666663,
+    "mean_retrieval_latency_ms": 3813.6855501215905,
+    "retrieval_failure_rate": 0.0
+  },
+  "human_verified_retrieval": null,
+  "reference_status": "provisional unless explicitly reviewed",
+  "attempted_posts": 2,
+  "generation": {
+    "valid_schema_outputs": 0,
+    "attempted_posts": 2,
+    "blocked": 0,
+    "failed": 2,
+    "citation_checks_passed": 0,
+    "privacy_checks_passed": 0,
+    "human_approval_required": 2,
+    "publish_allowed": 0
+  },
+  "subjective_quality": "Pending human rubric review; no fabricated tone/language/entailment scores.",
+  "validation_issue_counts": {},
+  "essential_safety_escalations": 1,
+  "policy_conflict_blocks": 0,
+  "current_guardrail_revalidation": {
+    "validator_version": "1.2.0",
+    "posts": 2,
+    "blocked": 0,
+    "review_required": 0,
+    "failed": 2,
+    "newly_blocked": [],
+    "publish_allowed": 0,
+    "note": "Revalidation of actual saved outputs only; original predictions and validation metrics preserved. Already-blocked redacted outputs are never reopened."
+  }
+}

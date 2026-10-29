@@ -1,0 +1,19 @@
+{
+  "provisional": {
+    "LLM_SMOKE_allergy": [
+      "CR-SAFE-01"
+    ],
+    "LLM_SMOKE_rider_threat": [
+      "CR-104"
+    ],
+    "LLM_SMOKE_security": [
+      "KB-106",
+      "CR-103"
+    ],
+    "LLM_SMOKE_injection": [
+      "CS-102",
+      "AI-103"
+    ]
+  },
+  "human_verified": {}
+}

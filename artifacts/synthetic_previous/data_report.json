@@ -1,0 +1,272 @@
+{
+  "audit": {
+    "generated_posts": 15000,
+    "shifted_test_posts": 3000
+  },
+  "splits": {
+    "train": {
+      "rows": 9000,
+      "users": 9000,
+      "start": "2026-01-01 00:33:16+00:00",
+      "end": "2026-02-24 08:31:51+00:00",
+      "positives": 910,
+      "nonzero_retweet_posts": 7592,
+      "prevalence": 0.10111111111111111
+    },
+    "validation": {
+      "rows": 3000,
+      "users": 3000,
+      "start": "2026-02-24 08:32:49+00:00",
+      "end": "2026-03-14 02:07:34+00:00",
+      "positives": 317,
+      "nonzero_retweet_posts": 2522,
+      "prevalence": 0.10566666666666667
+    },
+    "test": {
+      "rows": 3000,
+      "users": 3000,
+      "start": "2026-03-14 02:11:45+00:00",
+      "end": "2026-03-31 23:44:29+00:00",
+      "positives": 322,
+      "nonzero_retweet_posts": 2564,
+      "prevalence": 0.10733333333333334
+    },
+    "shifted_test": {
+      "rows": 3000,
+      "users": 3000,
+      "start": "2026-01-01 00:58:16+00:00",
+      "end": "2026-03-31 23:13:21+00:00",
+      "positives": 326,
+      "nonzero_retweet_posts": 2310,
+      "prevalence": 0.10866666666666666
+    }
+  },
+  "cohort": "synthetic_food_delivery",
+  "excluded_after_temporal_split": 0,
+  "split_rule": "Chronological 60/20/20 before labelling; independent fictional authors; shifted test separately generated with seed+1.",
+  "duration_hours": 2159.1869444444446,
+  "limitations": [
+    "All posts, authors, engagement and reference labels are fictional simulation outputs, not observed customer data.",
+    "Scores measure recovery of assumptions in this simulator, not performance on real social media or Indian customers.",
+    "Prediction is made after the first hour; it classifies eventual simulated spread, not a forecast of first-hour engagement.",
+    "Independent latent appeal, platform amplification, late noise and rare shocks remain unobserved by ML.",
+    "The shifted test is one specified stress scenario, not comprehensive evidence of real-world robustness.",
+    "Reference sentiment/topic labels come from templates and are not human-annotated ground truth.",
+    "The 5:1 missed-positive to false-alert cost is a prototype assumption; all responses still need human review."
+  ],
+  "excluded_top_level_fields": {
+    "post_key": "Text, reference labels, outcome, identifier or simulation provenance; never a predictor.",
+    "user_key": "Text, reference labels, outcome, identifier or simulation provenance; never a predictor.",
+    "date": "Text, reference labels, outcome, identifier or simulation provenance; never a predictor.",
+    "retweet_count": "Text, reference labels, outcome, identifier or simulation provenance; never a predictor.",
+    "synthetic": "Text, reference labels, outcome, identifier or simulation provenance; never a predictor.",
+    "simulation_regime": "Text, reference labels, outcome, identifier or simulation provenance; never a predictor.",
+    "text": "Text, reference labels, outcome, identifier or simulation provenance; never a predictor.",
+    "reference_topic": "Text, reference labels, outcome, identifier or simulation provenance; never a predictor.",
+    "reference_sentiment": "Text, reference labels, outcome, identifier or simulation provenance; never a predictor."
+  },
+  "characteristics": {
+    "followers_count": {
+      "count": 15000.0,
+      "mean": 1432.7332,
+      "std": 6884.082825352083,
+      "min": 0.0,
+      "50%": 303.0,
+      "90%": 2775.1000000000004,
+      "99%": 17060.050000000003,
+      "max": 322603.0
+    },
+    "friends_count": {
+      "count": 15000.0,
+      "mean": 331.52613333333335,
+      "std": 380.58093993328794,
+      "min": 6.0,
+      "50%": 223.0,
+      "90%": 697.0,
+      "99%": 1771.0400000000009,
+      "max": 12464.0
+    },
+    "listed_count": {
+      "count": 15000.0,
+      "mean": 4.738466666666667,
+      "std": 23.179157704117447,
+      "min": 0.0,
+      "50%": 1.0,
+      "90%": 10.0,
+      "99%": 56.0,
+      "max": 1106.0
+    },
+    "statuses_count": {
+      "count": 15000.0,
+      "mean": 2945.1764,
+      "std": 6455.0933718301585,
+      "min": 3.0,
+      "50%": 1103.0,
+      "90%": 6850.300000000001,
+      "99%": 28594.08,
+      "max": 235342.0
+    },
+    "verified": {
+      "count": 15000.0,
+      "mean": 0.0152,
+      "std": 0.1223517797058948,
+      "min": 0.0,
+      "50%": 0.0,
+      "90%": 0.0,
+      "99%": 1.0,
+      "max": 1.0
+    },
+    "account_age_days": {
+      "count": 15000.0,
+      "mean": 3022.3063333333334,
+      "std": 1722.5088880325636,
+      "min": 30.0,
+      "50%": 3030.0,
+      "90%": 5392.1,
+      "99%": 5938.0,
+      "max": 5999.0
+    },
+    "hour_utc": {
+      "count": 15000.0,
+      "mean": 11.545933333333334,
+      "std": 6.93450521809092,
+      "min": 0.0,
+      "50%": 12.0,
+      "90%": 21.0,
+      "99%": 23.0,
+      "max": 23.0
+    },
+    "weekday": {
+      "count": 15000.0,
+      "mean": 2.9865333333333335,
+      "std": 2.0128807121816696,
+      "min": 0.0,
+      "50%": 3.0,
+      "90%": 6.0,
+      "99%": 6.0,
+      "max": 6.0
+    },
+    "is_reply": {
+      "count": 15000.0,
+      "mean": 0.2416,
+      "std": 0.42806734997008056,
+      "min": 0.0,
+      "50%": 0.0,
+      "90%": 1.0,
+      "99%": 1.0,
+      "max": 1.0
+    },
+    "is_quote": {
+      "count": 15000.0,
+      "mean": 0.079,
+      "std": 0.26974775425088326,
+      "min": 0.0,
+      "50%": 0.0,
+      "90%": 0.0,
+      "99%": 1.0,
+      "max": 1.0
+    },
+    "text_length": {
+      "count": 15000.0,
+      "mean": 102.65813333333334,
+      "std": 19.889113411722903,
+      "min": 52.0,
+      "50%": 103.0,
+      "90%": 127.0,
+      "99%": 151.0,
+      "max": 179.0
+    },
+    "hashtag_count": {
+      "count": 15000.0,
+      "mean": 0.296,
+      "std": 0.4565061808923068,
+      "min": 0.0,
+      "50%": 0.0,
+      "90%": 1.0,
+      "99%": 1.0,
+      "max": 1.0
+    },
+    "mention_count": {
+      "count": 15000.0,
+      "mean": 0.6518,
+      "std": 0.47641567087936,
+      "min": 0.0,
+      "50%": 1.0,
+      "90%": 1.0,
+      "99%": 1.0,
+      "max": 1.0
+    },
+    "has_media": {
+      "count": 15000.0,
+      "mean": 0.3192,
+      "std": 0.46618220514075037,
+      "min": 0.0,
+      "50%": 0.0,
+      "90%": 1.0,
+      "99%": 1.0,
+      "max": 1.0
+    },
+    "has_url": {
+      "count": 15000.0,
+      "mean": 0.08,
+      "std": 0.27130224288383537,
+      "min": 0.0,
+      "50%": 0.0,
+      "90%": 0.0,
+      "99%": 1.0,
+      "max": 1.0
+    },
+    "first_hour_impressions": {
+      "count": 15000.0,
+      "mean": 168.30973333333333,
+      "std": 408.6988866927922,
+      "min": 0.0,
+      "50%": 61.0,
+      "90%": 381.10000000000036,
+      "99%": 1711.1000000000022,
+      "max": 12026.0
+    },
+    "first_hour_likes": {
+      "count": 15000.0,
+      "mean": 6.775133333333334,
+      "std": 18.81652214808231,
+      "min": 0.0,
+      "50%": 2.0,
+      "90%": 15.0,
+      "99%": 73.0,
+      "max": 697.0
+    },
+    "first_hour_replies": {
+      "count": 15000.0,
+      "mean": 0.7524,
+      "std": 2.213794848785414,
+      "min": 0.0,
+      "50%": 0.0,
+      "90%": 2.0,
+      "99%": 9.0,
+      "max": 62.0
+    },
+    "first_hour_retweets": {
+      "count": 15000.0,
+      "mean": 1.6031333333333333,
+      "std": 4.741525315730182,
+      "min": 0.0,
+      "50%": 0.0,
+      "90%": 4.0,
+      "99%": 19.0,
+      "max": 178.0
+    },
+    "retweet_count": {
+      "count": 15000.0,
+      "mean": 69.3846,
+      "std": 2046.2878281434118,
+      "min": 0.0,
+      "50%": 4.0,
+      "90%": 44.0,
+      "99%": 586.090000000002,
+      "max": 187024.0
+    }
+  },
+  "small_account_positive_posts": 590,
+  "simulation_manifest": "data/synthetic/simulation_manifest.json"
+}

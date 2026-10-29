@@ -1,0 +1,32 @@
+[
+  {
+    "post_id": "LLM_V3_Hinglish_11_0",
+    "text": "Wah kya fast service! paneer roll teen ghante mein aaya, kamaal hai.",
+    "source": "llm_language_supplement",
+    "language_hint": "Hinglish",
+    "human_verified": false,
+    "metadata": null,
+    "original_timestamp": null,
+    "presentation_timestamp": "2026-01-02T12:00:00+00:00"
+  },
+  {
+    "post_id": "LLM_SMOKE_allergy",
+    "text": "My throat is swelling and I cannot breathe after eating this meal.",
+    "source": "llm_language_supplement",
+    "language_hint": "English",
+    "human_verified": false,
+    "metadata": null,
+    "original_timestamp": null,
+    "presentation_timestamp": "2026-01-04T12:00:00+00:00"
+  },
+  {
+    "post_id": "LLM_V3_Hindi_00_0",
+    "text": "खाना बहुत स्वादिष्ट था, पनीर रोल समय पर मिला। धन्यवाद!",
+    "source": "llm_language_supplement",
+    "language_hint": "Hindi",
+    "human_verified": false,
+    "metadata": null,
+    "original_timestamp": null,
+    "presentation_timestamp": "2026-01-05T00:00:00+00:00"
+  }
+]

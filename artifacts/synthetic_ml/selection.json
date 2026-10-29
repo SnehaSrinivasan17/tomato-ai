@@ -1,0 +1,14 @@
+{
+  "model": "previous_logistic",
+  "thresholds": {
+    "default": 0.5,
+    "f1_optimal": 0.22,
+    "f2_optimal": 0.07,
+    "operational": 0.18
+  },
+  "selection": "Highest validation average precision; tie by name; prior model eligible.",
+  "operational_rule": "Validation only: minimize 5*FN+FP with recall >=0.50 and alert rate <=0.30; lower threshold breaks ties. If infeasible, maximize recall within alert cap. Previous model retains original threshold.",
+  "tuning": "RandomizedSearchCV on three chronological author-purged training folds.",
+  "confirmation_seed": 20261031,
+  "iterations_per_family": 8
+}

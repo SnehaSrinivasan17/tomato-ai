@@ -1,0 +1,8 @@
+post_id,post_text,sentiment,topic,urgency,needs_reply,risk_flag,language,sarcasm,human_review
+TOM_LIVE_001,"Bhai 2 ghante se order pending hai, customer support bot has been giving useless generic replies and hunger is peaking. Worst service!",negative,customer_support,high,True,none,hinglish,False,False
+TOM_LIVE_002,"The sushi platter from TokyoBites via Tomato was outstanding! Fresh, perfectly seasoned, and delivered in just 18 minutes. 5 stars!",positive,food_quality,low,False,none,en,False,False
+TOM_LIVE_003,Emergency! Found multiple dead insects in my salad bowl from GreenLeaf via Tomato! My daughter ate half of it and is now violently vomiting. Hospitalized!,negative,food_quality,critical,True,food_safety,en,False,True
+TOM_LIVE_004,Ordered Pasta and found a cockroach inside.,negative,food_quality,high,True,food_safety,en,False,True
+TOM_LIVE_005,2 ghante late food. Maza hi aa gaya,negative,delivery,medium,True,none,hinglish,True,False
+TOM_LIVE_006,I found a cockroach in my food. OHHH MYY GOODD!!!,,,,,,,,
+TOM_LIVE_007,shit food delivery service!,,,,,,,,

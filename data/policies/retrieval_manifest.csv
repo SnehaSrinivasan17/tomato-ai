@@ -1,0 +1,55 @@
+policy_id,doc_id,title,version,status,severity,owner,authority,jurisdiction,source_ids
+BV-101,TOM-01,Brand principles,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-01;SRC-02
+BV-102,TOM-01,Language and public privacy,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-01;SRC-02
+BV-103,TOM-01,Prohibited statements,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-01;SRC-02
+BV-104,TOM-01,Channel-specific voice,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-01;SRC-02
+BV-105,TOM-01,Localization,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-01;SRC-02
+CS-101,TOM-02,Missing and incorrect items,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-03;SRC-04
+CS-102,TOM-02,Non-delivery and delivery status,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-03;SRC-04
+CS-103,TOM-02,Refund and compensation decision,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-03;SRC-04
+CS-104,TOM-02,Cancellation and payment,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-03;SRC-04
+CS-105,TOM-02,Disputed outcomes and accessibility,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-03;SRC-04
+CS-106,TOM-02,Abuse prevention,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-03;SRC-04
+CR-101,TOM-03,Immediate danger,3.0,PROPOSED_REQUIRES_APPROVAL,P0/P1,Trust & Safety incident commander,human_only,India (fictional simulation),SRC-05;SRC-07
+CR-102,TOM-03,Food contamination and tampering,3.0,PROPOSED_REQUIRES_APPROVAL,P0/P1,Trust & Safety incident commander,human_only,India (fictional simulation),SRC-05;SRC-07
+CR-103,TOM-03,Privacy and account compromise,3.0,PROPOSED_REQUIRES_APPROVAL,P0/P1,Trust & Safety incident commander,human_only,India (fictional simulation),SRC-05;SRC-07
+CR-104,TOM-03,Credible threats and harassment,3.0,PROPOSED_REQUIRES_APPROVAL,P0/P1,Trust & Safety incident commander,human_only,India (fictional simulation),SRC-05;SRC-07
+CR-105,TOM-03,Crisis communications,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-05;SRC-07
+CR-106,TOM-03,Evidence and incident closure,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-05;SRC-07
+SM-101,TOM-04,Severity rubric,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-01;SRC-02
+SM-102,TOM-04,Proposed response targets,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-01;SRC-02
+SM-103,TOM-04,Public-to-private handoff,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-01;SRC-02
+SM-104,TOM-04,Moderation,3.0,PROPOSED_REQUIRES_APPROVAL,P0/P1,Trust & Safety incident commander,human_only,India (fictional simulation),SRC-01;SRC-02
+SM-105,TOM-04,Duplicates and viral threads,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-01;SRC-02
+TMP-101,TOM-05,Missing item,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-01;SRC-02
+TMP-102,TOM-05,"Marked delivered, not received",3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-01;SRC-02
+TMP-103,TOM-05,Allergen or illness,3.0,PROPOSED_REQUIRES_APPROVAL,P0/P1,Trust & Safety incident commander,human_only,India (fictional simulation),SRC-01;SRC-02
+TMP-104,TOM-05,Refund request,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-01;SRC-02
+TMP-105,TOM-05,Privacy exposure,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-01;SRC-02
+TMP-106,TOM-05,Delay,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-01;SRC-02
+TMP-107,TOM-05,Angry customer,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-01;SRC-02
+TMP-108,TOM-05,Praise,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-01;SRC-02
+TMP-109,TOM-05,Payment duplicate,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-01;SRC-02
+TMP-110,TOM-05,No policy match,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-01;SRC-02
+KB-101,TOM-06,Order journey,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-03;SRC-04
+KB-102,TOM-06,How to report an issue,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-03;SRC-04
+KB-103,TOM-06,Promotions,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-03;SRC-04
+KB-104,TOM-06,Fees and prices,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-03;SRC-04
+KB-105,TOM-06,Dietary and allergen information,3.0,PROPOSED_REQUIRES_APPROVAL,P0/P1,Trust & Safety incident commander,human_only,India (fictional simulation),SRC-03;SRC-04
+KB-106,TOM-06,Account and security,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-03;SRC-04
+AI-101,TOM-07,Decision precedence,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-05;SRC-07
+AI-102,TOM-07,Retrieval constraints,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-05;SRC-07
+AI-103,TOM-07,Abstention,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-05;SRC-07
+AI-104,TOM-07,Tool authority,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Customer Experience resolution lead,human_approval_for_remedy,India (fictional simulation),SRC-05;SRC-07
+AI-105,TOM-07,Approval matrix,3.0,PROPOSED_REQUIRES_APPROVAL,P0/P1,Trust & Safety incident commander,human_only,India (fictional simulation),SRC-05;SRC-07
+AI-106,TOM-07,Evaluation gates,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-05;SRC-07
+AI-107,TOM-07,Version and audit,3.0,PROPOSED_REQUIRES_APPROVAL,P3,Social Care agent,draft_only,India (fictional simulation),SRC-05;SRC-07
+CS-REF-01,TOM-02,Refund decision and authorisation,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Policy owner / designated operational lead,draft_only,India,SRC-01;SRC-03;SRC-05;SRC-07
+CS-PAY-02,TOM-02,Duplicate debit and pending payment,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Policy owner / designated operational lead,draft_only,India,SRC-01;SRC-03;SRC-05;SRC-07
+CR-SAFE-01,TOM-03,Suspected food poisoning or allergen exposure,3.0,PROPOSED_REQUIRES_APPROVAL,P0,Policy owner / designated operational lead,draft_only,India,SRC-01;SRC-03;SRC-05;SRC-07
+CR-PRIV-01,TOM-03,Personal data disclosure,3.0,PROPOSED_REQUIRES_APPROVAL,P1,Policy owner / designated operational lead,draft_only,India,SRC-01;SRC-03;SRC-05;SRC-07
+SM-SLA-01,TOM-04,Priority and internal response targets,3.0,PROPOSED_REQUIRES_APPROVAL,P1,Policy owner / designated operational lead,draft_only,India,SRC-01;SRC-03;SRC-05;SRC-07
+SM-MOD-01,TOM-04,Moderation and removal,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Policy owner / designated operational lead,draft_only,India,SRC-01;SRC-03;SRC-05;SRC-07
+AI-GATE-01,TOM-07,Mandatory human approval gate,3.0,PROPOSED_REQUIRES_APPROVAL,P1,Policy owner / designated operational lead,draft_only,India,SRC-01;SRC-03;SRC-05;SRC-07
+AI-RAG-02,TOM-07,Retrieval precedence and abstention,3.0,PROPOSED_REQUIRES_APPROVAL,P1,Policy owner / designated operational lead,draft_only,India,SRC-01;SRC-03;SRC-05;SRC-07
+AI-LOG-03,TOM-07,Audit and minimisation,3.0,PROPOSED_REQUIRES_APPROVAL,P2,Policy owner / designated operational lead,draft_only,India,SRC-01;SRC-03;SRC-05;SRC-07

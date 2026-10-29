@@ -1,0 +1,5 @@
+{
+  "status": "unavailable",
+  "reason": "Degenerate labels in train, validation, test. Training 90th percentile = 0.0. Boundary ties prevent a meaningful top-decile model. No model trained; require original-post data with varied, consistently measured outcomes.",
+  "cohort": "originals"
+}

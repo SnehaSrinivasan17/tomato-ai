@@ -1,0 +1,10 @@
+{
+  "validator_version": "1.2.0",
+  "posts": 4,
+  "blocked": 3,
+  "review_required": 1,
+  "failed": 0,
+  "newly_blocked": [],
+  "publish_allowed": 0,
+  "note": "Revalidation of actual saved outputs only; original predictions and validation metrics preserved. Already-blocked redacted outputs are never reopened."
+}

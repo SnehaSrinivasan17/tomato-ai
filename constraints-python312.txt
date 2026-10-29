@@ -1,0 +1,11 @@
+# Verified Windows Python 3.12 integration runtime; no model retraining.
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.4.2
+joblib==1.4.2
+streamlit==1.32.0
+plotly==5.22.0
+pyarrow==14.0.2
+groq==1.0.0
+python-dotenv==1.2.4
+pytest==8.4.2

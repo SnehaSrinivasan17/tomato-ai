@@ -1,0 +1,61 @@
+{
+  "features": [
+    "followers_count",
+    "friends_count",
+    "listed_count",
+    "statuses_count",
+    "verified",
+    "account_age_days",
+    "hour_utc",
+    "weekday",
+    "is_reply",
+    "is_quote"
+  ],
+  "defaults": {
+    "followers_count": 434.0,
+    "friends_count": 498.0,
+    "listed_count": 3.0,
+    "statuses_count": 12195.0,
+    "verified": 0.0,
+    "account_age_days": 1587.8709606481482,
+    "hour_utc": 13.0,
+    "weekday": 1.0,
+    "is_reply": 0.0,
+    "is_quote": 0.0
+  },
+  "types": {
+    "followers_count": "nonnegative numeric",
+    "friends_count": "nonnegative numeric",
+    "listed_count": "nonnegative numeric",
+    "statuses_count": "nonnegative numeric",
+    "verified": "nonnegative numeric",
+    "account_age_days": "nonnegative numeric",
+    "hour_utc": "nonnegative numeric",
+    "weekday": "nonnegative numeric",
+    "is_reply": "nonnegative numeric",
+    "is_quote": "nonnegative numeric"
+  },
+  "bounded": {
+    "hour_utc": [
+      0,
+      23
+    ],
+    "weekday": [
+      0,
+      6
+    ],
+    "verified": [
+      0,
+      1
+    ],
+    "is_reply": [
+      0,
+      1
+    ],
+    "is_quote": [
+      0,
+      1
+    ]
+  },
+  "missing": "Invalid or missing values are imputed using training medians; wholly missing features use zero."
+}

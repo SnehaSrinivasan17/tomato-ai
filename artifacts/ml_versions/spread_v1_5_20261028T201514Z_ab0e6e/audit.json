@@ -1,0 +1,165 @@
+{
+  "dataset": "data/synthetic/food_delivery.jsonl",
+  "dataset_rows": 15000,
+  "dataset_sha256": "d5b213fb5435d379d22b86eebfb877010d45b42b46b3f20089075eee8f0bc909",
+  "generator_sha256": "7d1aa5a5d74ca0b55a397a30fdbd0da4761ca138057172d25cdb0b82a4d27880",
+  "generator_manifest": {
+    "version": 1,
+    "seed": 20261029,
+    "ood_seed": 20261030,
+    "rows": 15000,
+    "shifted_rows": 3000,
+    "parameters": {
+      "in_distribution": {
+        "reach_scale": 1.0,
+        "media_effect": 0.35,
+        "late_noise": 0.85,
+        "amplification_sigma": 0.8,
+        "shock_probability": 0.015,
+        "shock_scale": 60
+      },
+      "shifted": {
+        "reach_scale": 0.65,
+        "media_effect": 0.05,
+        "late_noise": 1.2,
+        "amplification_sigma": 1.15,
+        "shock_probability": 0.04,
+        "shock_scale": 95
+      }
+    },
+    "features": [
+      "followers_count",
+      "friends_count",
+      "listed_count",
+      "statuses_count",
+      "verified",
+      "account_age_days",
+      "hour_utc",
+      "weekday",
+      "is_reply",
+      "is_quote",
+      "text_length",
+      "hashtag_count",
+      "mention_count",
+      "has_media",
+      "has_url",
+      "first_hour_impressions",
+      "first_hour_likes",
+      "first_hour_replies",
+      "first_hour_retweets"
+    ],
+    "limitations": [
+      "All posts, authors, engagement and reference labels are fictional simulation outputs, not observed customer data.",
+      "Scores measure recovery of assumptions in this simulator, not performance on real social media or Indian customers.",
+      "Prediction is made after the first hour; it classifies eventual simulated spread, not a forecast of first-hour engagement.",
+      "Independent latent appeal, platform amplification, late noise and rare shocks remain unobserved by ML.",
+      "The shifted test is one specified stress scenario, not comprehensive evidence of real-world robustness.",
+      "Reference sentiment/topic labels come from templates and are not human-annotated ground truth.",
+      "The 5:1 missed-positive to false-alert cost is a prototype assumption; all responses still need human review."
+    ]
+  },
+  "duplicate_post_ids": 0,
+  "duplicate_authors": 0,
+  "exact_duplicate_predictor_rows": 0,
+  "partition_overlap": {
+    "train_validation": {
+      "posts": 0,
+      "authors": 0
+    },
+    "train_test": {
+      "posts": 0,
+      "authors": 0
+    },
+    "validation_test": {
+      "posts": 0,
+      "authors": 0
+    }
+  },
+  "final_less_than_first_hour": 0,
+  "target_threshold": 43.0,
+  "tie_rule": ">=; include all boundary ties",
+  "features": [
+    "followers_count",
+    "friends_count",
+    "listed_count",
+    "statuses_count",
+    "verified",
+    "account_age_days",
+    "hour_utc",
+    "weekday",
+    "is_reply",
+    "is_quote",
+    "text_length",
+    "hashtag_count",
+    "mention_count",
+    "has_media",
+    "has_url",
+    "first_hour_impressions",
+    "first_hour_likes",
+    "first_hour_replies",
+    "first_hour_retweets"
+  ],
+  "partitions": {
+    "train": {
+      "rows": 9000,
+      "positives": 910,
+      "negatives": 8090,
+      "prevalence": 0.10111111111111111,
+      "start": "2026-01-01 00:33:16+00:00",
+      "end": "2026-02-24 08:31:51+00:00"
+    },
+    "validation": {
+      "rows": 3000,
+      "positives": 317,
+      "negatives": 2683,
+      "prevalence": 0.10566666666666667,
+      "start": "2026-02-24 08:32:49+00:00",
+      "end": "2026-03-14 02:07:34+00:00"
+    },
+    "test": {
+      "rows": 3000,
+      "positives": 322,
+      "negatives": 2678,
+      "prevalence": 0.10733333333333334,
+      "start": "2026-03-14 02:11:45+00:00",
+      "end": "2026-03-31 23:44:29+00:00"
+    }
+  },
+  "noise_analysis_training_only": {
+    "log_noise_variance": {
+      "platform_amplification": 0.6553946023956861,
+      "late_noise": 1.3235837718462482,
+      "shock_multiplier": 0.24474481893488417
+    },
+    "latent_appeal_log_variance": 0.24733226280931533,
+    "shock_prevalence": 0.011666666666666667,
+    "log_feature_final_correlations": {
+      "followers_count": 0.31095284794935507,
+      "first_hour_impressions": 0.4610621552596723,
+      "first_hour_likes": 0.4933654473370746,
+      "first_hour_retweets": 0.5574727236224196
+    },
+    "retweet_quantiles": {
+      "0.5": 4.0,
+      "0.9": 43.0,
+      "0.95": 91.0,
+      "0.99": 557.0,
+      "0.999": 5457.114000000023
+    },
+    "predictor_ap": {
+      "followers_count": 0.22234249623961522,
+      "first_hour_retweets": 0.37173033398266314,
+      "first_hour_likes": 0.3705614229309163
+    }
+  },
+  "findings": [
+    "No final outcome, reference labels or raw text in the predictor allowlist.",
+    "All authors are unique: author-purged temporal CV is defensive, not evidence of repeated-author robustness.",
+    "Post text/reference labels are sampled after engagement: text length/hashtags/mentions are deliberately weak controls, not semantic spread drivers.",
+    "Unobserved appeal, amplification, heavy-tailed late noise, rare shocks and Gamma-Poisson counts create overlap; no measured Bayes performance bound is claimed.",
+    "No verified historical-author engagement field exists; none is invented.",
+    "Prior cost-sensitive probability threshold is not F1-optimal. New threshold maximizes validation F1.",
+    "Original and confirmation tests were inspected in prior phases; this run cannot honestly call them untouched.",
+    "Generator and dataset are retained: changing noise after seeing prior tests would compromise evaluation."
+  ]
+}
