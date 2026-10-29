@@ -1,0 +1,20 @@
+{
+  "model": "BAAI/bge-m3",
+  "revision": "main",
+  "dimension": 1024,
+  "normalization": "L2, CLS pooling, max 8192 tokens",
+  "files": {
+    "01d7295f12a5c488b62923afa7a28d8645569a6c9ebe100a60751265bf2ae365.npy": "a672ce357b49313d01eff623cb4e4bc15a9493d7cbb2e80ad7c48a4ec8905185",
+    "501d6b4104714240191e98ec278d56d199766eb8cf80f669393ab03b9d704d9b.npy": "2abcef0926b3ac48277f5b991810c5b771d01c9944ace5d2b1d30fe974367543",
+    "b5944764032b209cbe9bd11eca34f449bf4650dfe42af5ff07fe71f9919f8ebb.npy": "5fe05c3cec9bdb3d9747d439983467c596759ac80516e7588d94d2c77ad13f6d",
+    "0966bae287d719048c769fd063cd49453c6a6ae63cee7ef30695702b5fed7e77.npy": "8ca82ecbf658fcb8d6b45f61a3e235a2c1e094fd2c3e9f4ca8aeb00a30361202",
+    "ea13c43e85bab60f08117ed576f9e0e55b43a41cc670c19ec5085779c151eeee.npy": "7e66b34fa84275514d9cf0ac757b522a190c02f03e2ee0b52c618f1a9b98b6f1"
+  },
+  "queries": {
+    "01d7295f12a5c488b62923afa7a28d8645569a6c9ebe100a60751265bf2ae365.npy": "Dinner from Fictional Bento Box arrived on time today. Ordered for a family dinner. #TomatoDelivery https://example.invalid/order\n{\"topic\": \"delivery\", \"secondary_topics\": [], \"urgency\": \"low\", \"safety_flags\": []}",
+    "501d6b4104714240191e98ec278d56d199766eb8cf80f669393ab03b9d704d9b.npy": "The biryani was missing from my Fictional Spice Corner order. Ordered for a family dinner.\n{\"topic\": \"delivery\", \"secondary_topics\": [], \"urgency\": \"medium\", \"safety_flags\": []}",
+    "b5944764032b209cbe9bd11eca34f449bf4650dfe42af5ff07fe71f9919f8ebb.npy": "My throat is swelling and I cannot breathe after eating this meal.\n{\"topic\": \"food_quality\", \"secondary_topics\": [], \"urgency\": \"critical\", \"safety_flags\": [\"food_safety\", \"allergen\", \"medical_emergency\"]}",
+    "0966bae287d719048c769fd063cd49453c6a6ae63cee7ef30695702b5fed7e77.npy": "Wah kya fast service! paneer roll teen ghante mein aaya, kamaal hai.\n{\"topic\": \"delivery\", \"secondary_topics\": [], \"urgency\": \"medium\", \"safety_flags\": []}",
+    "ea13c43e85bab60f08117ed576f9e0e55b43a41cc670c19ec5085779c151eeee.npy": "@TomatoHelp My noodles from Fictional Pizza Lane is 64 minutes late. This was my lunch break.\n{\"topic\": \"delivery\", \"secondary_topics\": [], \"urgency\": \"medium\", \"safety_flags\": []}"
+  }
+}

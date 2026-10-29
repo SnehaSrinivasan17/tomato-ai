@@ -8,8 +8,14 @@ DIRECTORY=ROOT/'data/demo'
 SOURCE=ROOT/'data/synthetic/food_delivery.jsonl'
 SEED=20261029
 
-def sha(path):
+@lru_cache(maxsize=32)
+def _sha_cached(path, size, modified):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def sha(path):
+    path=Path(path);info=path.stat()
+    return _sha_cached(str(path),info.st_size,info.st_mtime_ns)
 
 def prepare(directory=DIRECTORY):
     directory=Path(directory);directory.mkdir(parents=True,exist_ok=True)

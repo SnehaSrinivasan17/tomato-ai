@@ -7,7 +7,6 @@ import pandas as pd
 from llm.classifier import classify_post
 from llm.combined import validate_metadata
 from llm.storage import redact
-from ml.inference import SpreadPredictor
 from src.rag.retrieve import retrieve_policies
 from src.rag.generate import generate_response
 from src.rag.guardrails import risk_flags,sanitize_record
@@ -20,7 +19,9 @@ def dataset():
     return pd.read_json(ROOT/'data/synthetic/food_delivery.jsonl',lines=True).set_index('post_key')
 
 @lru_cache(maxsize=1)
-def predictor():return SpreadPredictor()
+def predictor():
+    from ml.inference import SpreadPredictor
+    return SpreadPredictor()
 
 
 def process_custom_post(post_text,metadata=None,post_id=None,*,classifier=None,model=None,retriever=None,generator=None,persist=True):

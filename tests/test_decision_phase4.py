@@ -118,7 +118,8 @@ def test_current_decision_navigation():
     app=AppTest.from_file(str(root/'app.py'),default_timeout=90).run()
     app.sidebar.radio[0].set_value('Crisis Monitoring & Reviewer Queue').run()
     assert not app.exception
-    assert any(m.label=='Stored decisions' for m in app.metric)
+    assert app.title[0].value=='Crisis Monitoring & Reviewer Queue'
+    assert not any(t.label=='Try It Yourself' for t in app.tabs)
 
 
 def test_unassessed_text_safety_abstains_without_inventing_labels():

@@ -74,6 +74,11 @@ def generate_response(post_text,classification,retrieval,operational_context=Non
                 validation['status']='blocked';validation['issues'].append('response_language_or_script_mismatch')
             if draft.insufficient_policy_evidence or draft.policy_conflict_detected:
                 validation['status']='blocked';validation['issues'].append('model_reports_insufficiency_or_conflict')
+            # One bounded correction for malformed evidence spans. All validators
+            # still run on the replacement; blocked output is never accepted.
+            if validation['status']=='blocked' and set(validation['issues'])=={'invalid_evidence_span'} and attempt==0 and retries>0:
+                payload['validation_feedback']='The previous response had invalid_evidence_span. Generate a fresh response. Every supporting_evidence claim must be an exact contiguous substring of draft_response; every quote must be an exact contiguous substring of the cited policy chunk. Use brief exact spans and policy quotes, without ellipses or translation.'
+                continue
             usage=getattr(reply,'usage',None)
             return dict(result,status=validation['status'],draft=draft.model_dump(mode='json'),validation=validation,attempts=attempt+1,token_usage={k:getattr(usage,k,None) for k in ['prompt_tokens','completion_tokens','total_tokens']} if usage else None,latency_ms=(time.perf_counter()-started)*1000)
         except Exception as error:

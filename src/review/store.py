@@ -118,5 +118,5 @@ def audit_rows(path=None):
     records=get_decisions(ids,path)
     for key in ids:
         r=records[key];d=r['decision'];last=r['events'][-1] if r['events'] else {}
-        rows.append(dict(decision_id=key,post_id=r['post_id'],created_at=r['created_at'],proposed_action=d['action'],final_action=last.get('final_action',d['action']),priority=d['priority'],rule_ids=', '.join(d['rule_ids']),review_status=r['review_status'],reviewer=last.get('reviewer'),draft_version=last.get('draft_version',r['draft_version']),missing_inputs=', '.join(d['missing_inputs']),processing_status=d['processing_status'],rule_version=d['decision_rule_version']))
+        rows.append(dict(customer_post=r['pipeline'].get('customer_post',''),decision_id=key,post_id=r['post_id'],created_at=r['created_at'],proposed_action=d['action'],final_action=last.get('final_action',d['action']),priority=d['priority'],rule_ids=', '.join(d['rule_ids']),review_status=r['review_status'],reviewer=last.get('reviewer'),draft_version=last.get('draft_version',r['draft_version']),missing_inputs=', '.join(d['missing_inputs']),processing_status=d['processing_status'],rule_version=d['decision_rule_version']))
     return rows

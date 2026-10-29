@@ -22,7 +22,7 @@ def local_model():
         revision=setting('BGE_MODEL_REVISION','main'),
         allow_patterns=['onnx/*','tokenizer.json','tokenizer_config.json','special_tokens_map.json','config.json']))
     options=ort.SessionOptions()
-    options.intra_op_num_threads=2;options.inter_op_num_threads=1
+    options.intra_op_num_threads=1;options.inter_op_num_threads=1
     options.enable_cpu_mem_arena=False;options.enable_mem_pattern=False
     options.graph_optimization_level=ort.GraphOptimizationLevel.ORT_DISABLE_ALL
     options.add_session_config_entry('session.disable_prepacking','1')
@@ -57,6 +57,22 @@ class BGEEncoder:
             raise ValueError('At least one text is required.')
         signature=self.model_name+'|'+setting('BGE_MODEL_REVISION','main')+'|'+self.endpoint+'|normalized-8192-v1|'
         paths=[self.cache/(hashlib.sha256((signature+t).encode()).hexdigest()+'.npy') for t in texts]
+        # Exact, integrity-checked vectors for fictional demo queries only.
+        # Matching includes the full query, model revision and endpoint identity.
+        from src.rag.settings import ROOT
+        bundled=ROOT/'data/demo/query_vectors'
+        manifest_path=bundled/'manifest.json'
+        if manifest_path.exists():
+            manifest=json.loads(manifest_path.read_text(encoding='utf8'))
+            for path in paths:
+                candidate=bundled/path.name
+                expected=manifest.get('files',{}).get(path.name)
+                if not path.exists() and expected and candidate.is_file():
+                    raw=candidate.read_bytes()
+                    if hashlib.sha256(raw).hexdigest()!=expected:
+                        raise ValueError('Demo query vector integrity mismatch.')
+                    temporary=path.with_suffix('.'+uuid4().hex+'.tmp')
+                    temporary.write_bytes(raw);temporary.replace(path)
         missing=[i for i,path in enumerate(paths) if not path.exists()]
         for start in range(0,len(missing),batch_size):
             indices=missing[start:start+batch_size]
