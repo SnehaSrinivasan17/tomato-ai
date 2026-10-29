@@ -42,18 +42,22 @@ def render():
                 st.write('Documents parsed:',len(audit['documents']),'Â· policy sections:',audit['policy_records'])
                 st.json(audit['conflicts']);st.markdown(audit['hierarchy'])
     report=None
-    reports=list((RESULTS/'evaluations').glob('*/report.json'))
-    if reports:
-        reports.sort(key=lambda p:p.stat().st_mtime,reverse=True)
-        if view=='Saved RAG evaluation':
-            names=[p.parent.name for p in reports]
+    if view in {'Saved RAG evaluation','Response quality'}:
+        reports=sorted((RESULTS/'evaluations').glob('*/report.json'),key=lambda p:p.stat().st_mtime,reverse=True)
+        if reports:
+            selected_report=reports[0]
             latest=RESULTS/'latest_evaluation.json'
-            preferred=json.loads(latest.read_text())['directory'].replace('\\','/').rstrip('/').split('/')[-1] if latest.exists() else names[0]
-            name=preferred if preferred in names else names[0]
-            st.caption('Saved RAG evaluation · '+name)
-        directory=next(p.parent for p in reports if p.parent.name==name)
-        try: report=json.loads((directory/'report.json').read_text(encoding='utf8'))
-        except (OSError,ValueError):st.error('Saved RAG evaluation report unavailable.')
+            if latest.exists():
+                try:
+                    pointer=json.loads(latest.read_text(encoding='utf8'))
+                    if not isinstance(pointer,dict):raise ValueError('Invalid evaluation pointer')
+                    preferred=str(pointer.get('directory','')).replace('\\','/').rstrip('/').split('/')[-1]
+                    selected_report=next((p for p in reports if p.parent.name==preferred),selected_report)
+                except (OSError,ValueError,TypeError):
+                    st.caption('Saved evaluation pointer unavailable; showing the latest available report.')
+            st.caption('Saved RAG evaluation - '+selected_report.parent.name)
+            try: report=json.loads(selected_report.read_text(encoding='utf8'))
+            except (OSError,ValueError):st.error('Saved RAG evaluation report unavailable.')
     if view=='Saved RAG evaluation':
         if report:
             st.caption('Evaluation model: '+str(report.get('metadata',{}).get('model','not recorded'))+' Â· generation prompt '+str(report.get('metadata',{}).get('generation_prompt_version','not recorded'))+' Â· saved run, not a live score')
