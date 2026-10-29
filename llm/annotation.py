@@ -44,6 +44,9 @@ def build_candidates():
 
 
 def connect(path=None):
+    from src.review import postgres
+    if isinstance(path,postgres.Scope) or (path is None and postgres.configured()):
+        return postgres.connect(path)
     path=Path(path or ANNOTATIONS);path.parent.mkdir(parents=True,exist_ok=True)
     db=sqlite3.connect(path,timeout=30)
     db.execute('CREATE TABLE IF NOT EXISTS annotations (post_id TEXT, reviewer TEXT, version INTEGER, reviewed_at TEXT, human_verified INTEGER, labels TEXT, notes TEXT, PRIMARY KEY(post_id,reviewer,version))')
@@ -57,6 +60,8 @@ def save_annotation(post_id,labels,reviewer,notes='',approved=False,path=None):
     if post_id not in {row['post_id'] for row in read_candidates()}:
         raise ValueError('Unknown candidate ID.')
     with connect(path) as db:
+        from src.review import postgres
+        if isinstance(db,postgres.Connection):db.execute('BEGIN IMMEDIATE')
         version=db.execute('SELECT COALESCE(MAX(version),0)+1 FROM annotations WHERE post_id=? AND reviewer=?',(post_id,reviewer.strip())).fetchone()[0]
         db.execute('INSERT INTO annotations VALUES (?,?,?,?,?,?,?)',(post_id,reviewer.strip(),version,
             datetime.now(timezone.utc).isoformat(),int(approved),validated.model_dump_json(),notes))
@@ -66,6 +71,7 @@ def save_annotation(post_id,labels,reviewer,notes='',approved=False,path=None):
 def annotations(path=None):
     with connect(path) as db:
         rows=db.execute('SELECT post_id,reviewer,version,reviewed_at,human_verified,labels,notes FROM annotations ORDER BY version').fetchall()
+        rows=[tuple(r.values()) if isinstance(r,dict) else r for r in rows]
     latest={}
     for post,reviewer,version,at,verified,labels,notes in rows:
         latest[(post,reviewer)]=dict(post_id=post,reviewer=reviewer,annotation_version=version,

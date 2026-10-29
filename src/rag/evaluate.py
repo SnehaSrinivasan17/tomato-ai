@@ -40,6 +40,12 @@ def candidates():
 
 def approved_references():
     latest={}
+    from src.review import postgres
+    if postgres.configured():
+        with postgres.connect() as db:
+            for row in db.execute('SELECT payload FROM reference_reviews ORDER BY rowid'):
+                r=json.loads(row[0]);latest[r['post_id']]=r
+        return {k:v for k,v in latest.items() if v['human_verified']}
     if REVIEWS.exists():
         for line in REVIEWS.read_text(encoding='utf8').splitlines():
             r=json.loads(line);latest[r['post_id']]=r
@@ -52,6 +58,13 @@ def save_review(post_id,policy_ids,reviewer,approved,notes=''):
     valid={r['policy_id'] for r in load_chunks() if r['kind']=='policy'}
     if not policy_ids or not set(policy_ids).issubset(valid):raise ValueError('Reference mappings must use existing policy IDs.')
     record=dict(post_id=post_id,expected_policy_ids=policy_ids,reviewer=reviewer.strip(),human_verified=bool(approved),notes=notes,reviewed_at=datetime.now(timezone.utc).isoformat())
+    from src.review import postgres
+    if postgres.configured():
+        from uuid import uuid4
+        with postgres.connect() as db:
+            db.execute('INSERT INTO reference_reviews(event_id,post_id,reviewed_at,payload) VALUES (?,?,?,?)',
+                       (uuid4().hex,post_id,record['reviewed_at'],json.dumps(record,ensure_ascii=False)))
+        return
     with REVIEWS.open('a',encoding='utf8') as file:file.write(json.dumps(record,ensure_ascii=False)+'\n')
 
 

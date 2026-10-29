@@ -15,6 +15,9 @@ class ReviewStatus(str,Enum):
 
 
 def connect(path=None):
+    from src.review import postgres
+    if isinstance(path,postgres.Scope) or (path is None and postgres.configured()):
+        return postgres.connect(path)
     path=Path(path or DATABASE);path.parent.mkdir(parents=True,exist_ok=True)
     db=sqlite3.connect(path,timeout=30);db.row_factory=sqlite3.Row
     db.execute('PRAGMA foreign_keys=ON')
@@ -31,26 +34,45 @@ def draft_hash(draft):
     return hashlib.sha256(json.dumps(draft,sort_keys=True,ensure_ascii=False).encode()).hexdigest() if draft else None
 
 
-def record_decision(result,path=None):
+def record_decision(result,path=None,*,_connection=None):
     decision=Decision.model_validate(result['decision']);safe=sanitize_record(result)
     draft=(safe.get('generation') or {}).get('draft')
     # Source safety blocks are never made copyable by persisting them.
     if (safe.get('generation') or {}).get('status')=='blocked' and draft:
         draft['draft_response']='[BLOCKED DRAFT]'
     key=uuid4().hex;version=draft_hash(draft)
-    with connect(path) as db:
+    def insert(db):
         db.execute('INSERT INTO decisions VALUES (?,?,?,?,?,?)',(key,decision.post_id,datetime.now(timezone.utc).isoformat(),decision.model_dump_json(),json.dumps(safe,ensure_ascii=False),version))
+    if _connection is None:
+        with connect(path) as db:insert(db)
+    else:insert(_connection)
     return key
 
 
-def get_decision(decision_id,path=None):
-    with connect(path) as db:
-        row=db.execute('SELECT * FROM decisions WHERE decision_id=?',(decision_id,)).fetchone()
-        if row is None:raise ValueError('Unknown stored decision.')
-        events=[dict(r) for r in db.execute('SELECT * FROM review_events WHERE decision_id=? ORDER BY revision',(decision_id,))]
+def unpack_record(row,events):
     result=dict(row);result['decision']=json.loads(result.pop('decision_json'));result['pipeline']=json.loads(result.pop('pipeline_json'));result['events']=events
     result['review_status']=events[-1]['status'] if events else ('PENDING_REVIEW' if result['decision']['requires_human_review'] else None)
     result['revision']=events[-1]['revision'] if events else 0
+    return result
+
+
+def get_decisions(decision_ids,path=None):
+    """Fetch a feed's snapshots and events in batches rather than two remote calls per post."""
+    ids=list(dict.fromkeys(decision_ids));records={}
+    for start in range(0,len(ids),500):
+        batch=ids[start:start+500];marks=','.join('?' for _ in batch)
+        with connect(path) as db:
+            rows=db.execute('SELECT * FROM decisions WHERE decision_id IN ('+marks+')',tuple(batch)).fetchall()
+            events=db.execute('SELECT * FROM review_events WHERE decision_id IN ('+marks+') ORDER BY revision',tuple(batch)).fetchall()
+        grouped={key:[] for key in batch}
+        for event in events:grouped[event['decision_id']].append(dict(event))
+        records.update({r['decision_id']:unpack_record(r,grouped[r['decision_id']]) for r in rows})
+    return records
+
+
+def get_decision(decision_id,path=None):
+    result=get_decisions([decision_id],path).get(decision_id)
+    if result is None:raise ValueError('Unknown stored decision.')
     return result
 
 
@@ -93,7 +115,8 @@ def review(decision_id,status,reviewer,*,notes='',final_action=None,edited_text=
 def audit_rows(path=None):
     with connect(path) as db:ids=[r[0] for r in db.execute('SELECT decision_id FROM decisions ORDER BY created_at DESC')]
     rows=[]
+    records=get_decisions(ids,path)
     for key in ids:
-        r=get_decision(key,path);d=r['decision'];last=r['events'][-1] if r['events'] else {}
+        r=records[key];d=r['decision'];last=r['events'][-1] if r['events'] else {}
         rows.append(dict(decision_id=key,post_id=r['post_id'],created_at=r['created_at'],proposed_action=d['action'],final_action=last.get('final_action',d['action']),priority=d['priority'],rule_ids=', '.join(d['rule_ids']),review_status=r['review_status'],reviewer=last.get('reviewer'),draft_version=last.get('draft_version',r['draft_version']),missing_inputs=', '.join(d['missing_inputs']),processing_status=d['processing_status'],rule_version=d['decision_rule_version']))
     return rows
