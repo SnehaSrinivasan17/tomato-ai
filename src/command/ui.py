@@ -8,6 +8,9 @@ from src.demo.ui import overview, styled_table, public_frame, cached_feed, activ
 def render():
     st.title('Tomato AI · Command Center')
     st.subheader('Operational overview')
+    if st.button('Refresh overview'):
+        active_path.clear();cached_feed.clear()
+    st.caption('Overview refreshes at most once per minute; refresh now for the latest activity.')
     rows=cached_feed(str(active_path()));overview(rows,'command')
     st.subheader('Recent activity')
     actual=[r for r in rows if r['decision_id']]

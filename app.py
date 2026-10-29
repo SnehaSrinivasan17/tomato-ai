@@ -17,7 +17,7 @@ button[kind="primary"] {background:#357d73;border-color:#357d73;}
 h1 {font-size:2rem;} h2 {font-size:1.45rem;} h3 {font-size:1.15rem;}
 @media (prefers-reduced-motion: reduce) {* {animation:none!important;transition:none!important;}}
 </style>''',unsafe_allow_html=True)
-PAGES=['Command Center','Demo & Audit','ML Spread Lab','LLM Evaluation Lab','RAG & Response Lab','Crisis Monitoring & Reviewer Queue']
+PAGES=['Command Center','Demo & Audit','Crisis Monitoring & Reviewer Queue','ML Spread Lab','LLM Evaluation Lab','RAG & Response Lab']
 st.sidebar.title('Tomato AI')
 page=st.sidebar.radio('Workspace',PAGES)
 st.sidebar.caption('Fictional demonstration · human approval · publication disabled')

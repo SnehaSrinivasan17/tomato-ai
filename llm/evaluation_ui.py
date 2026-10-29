@@ -66,14 +66,16 @@ def render(legacy,try_it):
     if mode.startswith('Historical'):
         st.caption('Historical prompt and schema · provisional synthetic references · not human-verified')
         legacy();return
-    sections=st.tabs(['Model performance','Evaluation graphs','Error analysis','Try It Yourself','Human annotation'])
-    with sections[4]: annotation_ui()
-    with sections[3]: try_it()
+    view=st.radio('Evaluation view',['Model performance','Evaluation graphs','Error analysis','Try It Yourself','Human annotation'],horizontal=True)
+    if view=='Human annotation':
+        annotation_ui();return
+    if view=='Try It Yourself':
+        try_it();return
     paths=sorted(RUNS.glob('*/report.json'),reverse=True) if RUNS.exists() else []
     if not paths:
-        with sections[0]: st.info('Canonical evaluation pending. No completed evaluation report found. Run python -m llm.evaluation.')
+        st.info('Canonical evaluation pending. No completed evaluation report found. Run python -m llm.evaluation.')
         return
-    with sections[0]:
+    with st.container():
         run_name=st.selectbox('Saved evaluation run',[p.parent.name for p in paths],key='canonical_run_name_v3')
         path=next((p for p in paths if p.parent.name==run_name),paths[0])
         try: report=json.loads(path.read_text(encoding='utf8'))
@@ -101,7 +103,7 @@ def render(legacy,try_it):
             st.write('API failure rate:',data.get('api_failure_rate'),'· average / P95 latency (ms):',data.get('average_latency_ms'),data.get('p95_latency_ms'))
             st.caption('Field denominators differ where existing English posts have only partial reference labels. Critical recall requires critical urgency and every expected safety flag; synthetic provisional scores are not verified accuracy.')
     if data is None: return
-    with sections[1]:
+    if view=='Evaluation graphs':
         for field in ['sentiment','urgency']:
             saved=data['fields'].get(field)
             if not saved: st.info(field+' references unavailable.');continue
@@ -116,7 +118,7 @@ def render(legacy,try_it):
         plot_classes(data['fields'].get('sarcasm_detected',{}).get('classes',[]),'Sarcasm performance','sarcasm_pr')
         fig=go.Figure(go.Histogram(x=data['latencies_ms'],nbinsx=20))
         st.plotly_chart(layout(fig,'Observed inference latency · uncached calls','Milliseconds','Calls'),use_container_width=True,key='latency')
-    with sections[2]:
+    if view=='Error analysis':
         errors=pd.DataFrame(data['errors'])
         st.caption(meta['model_id']+' · prompt '+meta['prompt_version'])
         if errors.empty: st.info('No errors against available references in this category.')

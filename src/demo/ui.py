@@ -13,12 +13,16 @@ from src.demo import runner
 from src.review.store import get_decision
 from src.decision.ui import show_result
 
-@st.cache_resource(ttl=10,max_entries=1,show_spinner=False)
+@st.cache_resource(ttl=60,max_entries=1,show_spinner=False)
 def active_path():return runner.active_path()
 
-@st.cache_data(ttl=15,max_entries=4,show_spinner=False)
+@st.cache_data(ttl=60,max_entries=4,show_spinner=False)
 def cached_feed(scope_key):
-    return all_feed(posts())
+    return all_feed(demo_posts(),path=active_path())
+
+@st.cache_resource(show_spinner=False)
+def demo_posts():
+    return posts()
 
 def chart(counts,title,key):
     if counts:st.plotly_chart(layout(go.Figure(go.Bar(x=list(counts),y=list(counts.values()))),title,'Category','Posts'),use_container_width=True,key=key)
@@ -57,17 +61,20 @@ def result_view(result):
     show_result(result,compact=True)
 
 
-def metadata_inputs(values,key):
+def metadata_inputs(values,key,custom=False):
     from src.workflow.pipeline import predictor
     schema=predictor().schema;metadata={}
     with st.expander('Virality predictor · author and first-hour engagement',expanded=True):
         with st.form(key+'_metadata_form'):
+            text=st.text_area('Post text - English, Hindi or Hinglish',key=key+'_text') if custom else None
             columns=st.columns(3)
             for i,feature in enumerate(schema['features']):
                 bounds=schema.get('bounded',{}).get(feature)
                 with columns[i%3]:
                     metadata[feature]=st.number_input(feature.replace('_',' ').title(),min_value=0,max_value=int(bounds[1]) if bounds else None,value=int(values.get(feature,0)),step=1,key=key+'_'+feature)
+            force=st.checkbox('Refresh live analysis',key=key+'_force',help='Requests external services again instead of reusing a successful cached analysis.')
             st.form_submit_button('Update spread prediction')
+            submitted=st.form_submit_button('Analyze Post',type='primary')
         from llm.combined import validate_metadata
         cleaned,errors=validate_metadata(metadata,schema)
         if errors:st.warning('; '.join(errors))
@@ -75,13 +82,13 @@ def metadata_inputs(values,key):
             spread=predictor().predict(cleaned)
             st.metric('Predicted high-spread probability',f"{spread['probability']:.1%}")
             st.caption(f"{'High spread' if spread['high_spread'] else 'Lower spread'} · operational threshold {spread['operational_threshold']:.0%} · synthetic model")
-    return metadata
+    return metadata,text,force,submitted
 
 
 @st.cache_data(show_spinner=False,max_entries=1)
 def example_catalog():
     from src.workflow.pipeline import predictor
-    available=posts();lookup={p['post_id']:p for p in available};examples=[]
+    available=demo_posts();lookup={p['post_id']:p for p in available};examples=[]
     scenarios=json.loads((DIRECTORY/'scenarios.json').read_text())
     for name,scenario in scenarios.items():
         post=dict(lookup[scenario['post_id']])
@@ -96,7 +103,7 @@ def example_catalog():
 
 
 def analyze_view(key='unified'):
-    available=posts()
+    available=demo_posts()
     mode=st.radio('Analyze Post input',['Demo examples','Custom post'],horizontal=True,key=key+'_mode')
     if mode=='Demo examples':
         catalog=example_catalog()
@@ -105,7 +112,7 @@ def analyze_view(key='unified'):
         selected=labels.index(chosen)
         label,example,intent=catalog[selected];post=dict(example);st.write(post['text'])
         st.caption('Reference scenario intent: '+intent+' Priority is determined by analysis.')
-        with st.expander('Compare demo examples'):
+        if st.checkbox('Compare demo examples',key=key+'_compare'):
             from src.workflow.pipeline import predictor
             rows=[]
             saved={r['post_id']:r for r in cached_feed(str(active_path()))}
@@ -118,15 +125,13 @@ def analyze_view(key='unified'):
         if not defaults:
             st.caption('Simulated demonstration metadata supplied for this language/safety example; these are not measured engagement.')
             defaults=available[0]['metadata']
-        metadata=metadata_inputs(defaults,key+'_'+str(selected))
+        metadata,_,force,submitted=metadata_inputs(defaults,key+'_'+str(selected))
         post['metadata']=metadata
     else:
-        text=st.text_area('Post text · English, Hindi or Hinglish',key=key+'_text')
         st.caption('Metadata is prefilled with a fictional example. Edit it to explore spread; values are simulated, not inferred from your text.')
-        metadata=metadata_inputs(available[0]['metadata'],key+'_custom')
+        metadata,text,force,submitted=metadata_inputs(available[0]['metadata'],key+'_custom',custom=True)
         post=dict(post_id='CUSTOM_'+fingerprint(dict(text=text,metadata=metadata))[:24],text=text,metadata=metadata,source='custom submission')
-    force=st.checkbox('Refresh live analysis',key=key+'_force',help='Uses external services again. Otherwise reuse a matching successful analysis.')
-    if st.button('Analyze Post',type='primary',key=key+'_run'):
+    if submitted:
         if not post['text'].strip() or len(post['text'])>10000:st.error('Enter 1–10,000 characters.');return
         with st.spinner('Analyzing the post and checking policy evidence…'):
             try:
@@ -136,15 +141,18 @@ def analyze_view(key='unified'):
                 st.error('Analysis could not be saved or completed. Check database connectivity and service configuration, then retry. Error category: '+type(error).__name__)
     last=st.session_state.get(key+'_last')
     if last and last[0]==fingerprint(post) and last[1]==str(active_path()):
-        r=last[2];stored=get_decision(r['decision_id'],active_path())
-        result_view(dict(r,review_status=stored['review_status'] if stored else r.get('review_status')))
+        r=last[2]
+        if st.button('Refresh review status',key=key+'_review_refresh'):
+            stored=get_decision(r['decision_id'],active_path())
+            if stored:r['review_status']=stored['review_status']
+        result_view(r)
         if (r.get('classification') or {}).get('status')!='success':st.warning('Classification is unavailable. Retry after checking Groq credentials or quota.')
         if (r.get('retrieval') or {}).get('status')=='error':st.warning('Policy retrieval is unavailable. Check Qdrant and embedding service resources. Safety review remains active.')
         if (r.get('generation') or {}).get('status') in {'error','blocked'}:st.warning('A validated draft is unavailable. The review decision remains visible; retry if the service was temporarily unavailable.')
 
 
 def overview(rows,key='overview'):
-    a=analytics(rows)
+    a=analytics(rows,include_cache_hits=False)
     for labels in [[('Analyzed posts','analyzed'),('Safety escalations','safety_escalations'),('Pending reviews','pending_review')]]:
         for col,(label,field) in zip(st.columns(3),labels):col.metric(label,a[field])
     st.caption('Counts use the latest stored attempt per post in the active demo session, including custom submissions. Earlier attempts remain in the audit history.')
@@ -154,12 +162,13 @@ def overview(rows,key='overview'):
 def filtered_feed(rows,key='feed'):
     frame=pd.DataFrame(rows)
     if frame.empty:st.info('No feed records.');return
-    with st.expander('Filter feed'):
+    with st.form(key+'_filter_form'):
         columns=st.columns(4)
         for i,field in enumerate(['date','sentiment','language','topic','urgency','high_spread','action','review_status']):
             values=sorted({str(x)[:10] if field=='date' else str(x) for x in frame[field].dropna()})
             with columns[i%4]:selected=st.multiselect(field.replace('_',' ').title(),values,key=key+'_'+field)
             if selected:frame=frame[frame[field].map(lambda x:str(x)[:10] if field=='date' else str(x)).isin(selected)]
+        st.form_submit_button('Apply filters')
     styled_table(public_frame(frame))
 
 def render():

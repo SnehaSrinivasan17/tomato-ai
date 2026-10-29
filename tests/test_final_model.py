@@ -63,8 +63,9 @@ def test_frozen_threshold_explorer_does_not_change_artifacts():
     app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'app.py'),default_timeout=90).run()
     app.sidebar.radio[0].set_value('ML Spread Lab').run()
     assert not app.exception
-    assert len(app.get('plotly_chart'))>=7
+    assert len(app.get('plotly_chart'))>=6
     assert not app.selectbox
+    next(r for r in app.radio if r.label=='Model view').set_value('Threshold explorer').run()
     app.slider[0].set_value(.5).run()
     assert not app.exception
     bundle=load_bundle(directory)

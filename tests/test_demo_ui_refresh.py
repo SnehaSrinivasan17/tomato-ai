@@ -82,3 +82,63 @@ def test_packaged_vectors_avoid_local_encoder(tmp_path,monkeypatch):
         vector=encoder.encode([query])
         assert vector.shape==(1,1024) and np.isfinite(vector).all()
         assert abs(np.linalg.norm(vector)-1)<1e-5
+
+
+def test_demo_initial_view_avoids_database_and_compare_work(monkeypatch):
+    from src.demo import ui
+    def forbidden(*args,**kwargs):
+        raise AssertionError('Initial demo view must not query the remote database')
+    monkeypatch.setattr(ui,'active_path',forbidden)
+    monkeypatch.setattr(ui,'cached_feed',forbidden)
+    app=AppTest.from_string('from src.demo.ui import analyze_view; analyze_view("fast_demo")').run(timeout=30)
+    assert not app.exception
+    assert app.get('form')
+    next(r for r in app.radio if r.label=='Analyze Post input').set_value('Custom post').run(timeout=30)
+    assert not app.exception
+    assert app.text_area and app.get('form')
+
+
+def test_overview_statistics_do_not_query_database(monkeypatch):
+    from src.demo import runner
+    def forbidden(*args,**kwargs):raise AssertionError('Unexpected database request')
+    monkeypatch.setattr(runner,'active_path',forbidden)
+    monkeypatch.setattr(runner,'db',forbidden)
+    assert runner.analytics([],include_cache_hits=False)['analyzed']==0
+
+
+def test_navigation_order():
+    import ast
+    from pathlib import Path
+    tree=ast.parse(Path('app.py').read_text(encoding='utf8'))
+    pages=next(ast.literal_eval(node.value) for node in tree.body if isinstance(node,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='PAGES' for t in node.targets))
+    assert pages[:3]==['Command Center','Demo & Audit','Crisis Monitoring & Reviewer Queue']
+
+
+def test_custom_form_submits_text_and_metadata_together(monkeypatch,tmp_path):
+    from src.demo import ui
+    from tests.test_decision_phase4 import eligible_record
+    def run(post,**kwargs):
+        result=eligible_record()
+        result.update(customer_post=post['text'],input_metadata=post['metadata'],decision_id='fixture',review_status='PENDING_REVIEW')
+        return result
+    workflow=Mock(side_effect=run)
+    monkeypatch.setattr(ui,'analyze',workflow)
+    monkeypatch.setattr(ui,'active_path',lambda:tmp_path/'review.db')
+    app=AppTest.from_string('from src.demo.ui import analyze_view; analyze_view("form_check")').run(timeout=30)
+    next(r for r in app.radio if r.label=='Analyze Post input').set_value('Custom post').run(timeout=30)
+    app.text_area[0].set_value('My order is missing an item.')
+    next(n for n in app.number_input if n.label=='First Hour Likes').set_value(123)
+    next(b for b in app.button if b.label=='Analyze Post').click().run(timeout=30)
+    assert not app.exception
+    workflow.assert_called_once()
+    post=workflow.call_args.args[0]
+    assert post['text']=='My order is missing an item.'
+    assert post['metadata']['first_hour_likes']==123
+
+
+def test_evaluation_does_not_render_hidden_annotation(monkeypatch):
+    from llm import evaluation_ui
+    def forbidden():raise AssertionError('Hidden annotation must not query the database')
+    monkeypatch.setattr(evaluation_ui,'annotation_ui',forbidden)
+    app=AppTest.from_string('from llm.evaluation_ui import render; render(lambda:None,lambda:None)').run(timeout=30)
+    assert not app.exception

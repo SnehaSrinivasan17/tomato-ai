@@ -9,7 +9,6 @@ from ml.display import display_table
 from src.decision.rules import RULES,PRECEDENCE,VERSION
 from src.decision.schemas import Action
 from src.review.store import audit_rows,get_decision,get_decisions,review,ReviewStatus
-from src.workflow.pipeline import dataset,predictor,process_post,process_custom_post
 
 
 def show_result(result, compact=False):
@@ -65,25 +64,27 @@ def render(review_path=None):
     record=get_decision(chosen,review_path);show_result(dict(record['pipeline'],review_status=record['review_status']))
     st.write('Current review status:',record['review_status'],'· revision:',record['revision'])
     st.caption('Draft approval records a human decision only. It never posts or publishes anything.')
-    reviewer=st.text_input('Human reviewer identifier')
-    status=st.selectbox('New review status',[s.value for s in ReviewStatus])
-    proposed=record['decision']['action'];actions=[a.value for a in Action]
-    final_action=st.selectbox('Human final action',actions,index=actions.index(proposed))
-    notes=st.text_area('Reviewer notes / action-change rationale')
-    g=record['pipeline'].get('generation') or {};candidate=g.get('draft') or {}
-    latest_edit=next((e for e in reversed(record['events']) if e['edited_draft']),None)
-    if latest_edit:
-        candidate=json.loads(latest_edit['edited_draft'])
-        st.write('Latest edited revision:',candidate.get('draft_response',''))
-        st.caption('Revision validation: '+str(json.loads(latest_edit['validation_json']).get('status')))
-    edited_text=None;support=None
-    if status=='EDITED':
-        edited_text=st.text_area('Final edited draft',value=candidate.get('draft_response',''))
-        support=st.text_area('Edited supporting evidence JSON (exact draft spans and policy quotes)',value=json.dumps(candidate.get('supporting_evidence',[]),ensure_ascii=False,indent=2))
-    confirmed=st.checkbox('I am the identified human reviewer and have checked this decision and draft',value=False)
-    if st.button('Record human review'):
+    with st.form('human_review_form_'+chosen):
+        reviewer=st.text_input('Human reviewer identifier')
+        status=st.selectbox('New review status',[s.value for s in ReviewStatus])
+        proposed=record['decision']['action'];actions=[a.value for a in Action]
+        final_action=st.selectbox('Human final action',actions,index=actions.index(proposed))
+        notes=st.text_area('Reviewer notes / action-change rationale')
+        g=record['pipeline'].get('generation') or {};candidate=g.get('draft') or {}
+        latest_edit=next((e for e in reversed(record['events']) if e['edited_draft']),None)
+        if latest_edit:
+            candidate=json.loads(latest_edit['edited_draft'])
+            st.write('Latest edited revision:',candidate.get('draft_response',''))
+            st.caption('Revision validation: '+str(json.loads(latest_edit['validation_json']).get('status')))
+        edited_text=None;support=None
+        with st.expander('Draft editing (used only for EDITED status)'):
+            edited_text=st.text_area('Final edited draft',value=candidate.get('draft_response',''))
+            support=st.text_area('Edited supporting evidence JSON (exact draft spans and policy quotes)',value=json.dumps(candidate.get('supporting_evidence',[]),ensure_ascii=False,indent=2))
+        confirmed=st.checkbox('I am the identified human reviewer and have checked this decision and draft',value=False)
+        submitted=st.form_submit_button('Record human review')
+    if submitted:
         try:
-            result=review(chosen,status,reviewer,notes=notes,final_action=final_action,edited_text=edited_text,edited_support=json.loads(support) if support is not None else None,human_confirmed=confirmed,expected_revision=record['revision'],path=review_path)
+            result=review(chosen,status,reviewer,notes=notes,final_action=final_action,edited_text=edited_text if status=='EDITED' else None,edited_support=json.loads(support) if status=='EDITED' and support is not None else None,human_confirmed=confirmed,expected_revision=record['revision'],path=review_path)
             st.success('Review recorded; no publication occurred.')
             from src.demo.ui import cached_feed
             cached_feed.clear()

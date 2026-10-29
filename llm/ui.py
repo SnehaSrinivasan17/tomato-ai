@@ -104,7 +104,6 @@ def evaluation_page():
 def combined_page():
     st.title('Combined Analysis')
     st.caption('Independent LLM triage and existing synthetic spread model · observed first-hour inputs')
-    post = st.text_area('Social media post', key='combined_post', height=120)
     try:
         directory=active_model_directory()
         schema = json.loads((directory/'feature_schema.json').read_text())
@@ -112,16 +111,19 @@ def combined_page():
     except (OSError, ValueError):
         st.error('The existing ML feature schema is unavailable. Standalone LLM Classification remains available.')
         return
-    st.write('Enter measured metadata. Blank fields leave ML prediction unavailable; no training-median defaults are substituted here.')
-    metadata = {}
-    columns = st.columns(3)
-    for index, feature in enumerate(schema['features']):
-        bounds = schema['bounded'].get(feature)
-        suffix = f' ({bounds[0]}–{bounds[1]})' if bounds else ''
-        with columns[index % 3]:
-            metadata[feature] = st.text_input(feature.replace('_', ' ').title()+suffix,
-                key='combined_'+feature, placeholder='Required; enter 0 if observed zero')
-    if st.button('Run combined analysis', type='primary'):
+    with st.form('combined_inputs'):
+        post = st.text_area('Social media post', key='combined_post', height=120)
+        st.write('Enter measured metadata. Blank fields leave ML prediction unavailable; no training-median defaults are substituted here.')
+        metadata = {}
+        columns = st.columns(3)
+        for index, feature in enumerate(schema['features']):
+            bounds = schema['bounded'].get(feature)
+            suffix = f' ({bounds[0]}–{bounds[1]})' if bounds else ''
+            with columns[index % 3]:
+                metadata[feature] = st.text_input(feature.replace('_', ' ').title()+suffix,
+                    key='combined_'+feature, placeholder='Required; enter 0 if observed zero')
+        submitted=st.form_submit_button('Run combined analysis', type='primary')
+    if submitted:
         with st.spinner('Running independent classifications…'):
             result = combined_analysis(post, metadata)
         st.session_state['combined_last'] = dict(result=result, text=post, metadata=metadata.copy())

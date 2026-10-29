@@ -97,10 +97,10 @@ def analyze(post,*,force=False,path=None,workflow=None,version_info=None):
     saved=get_decision(decision_id,path)
     return dict(saved['pipeline'],decision_id=decision_id,review_status=saved['review_status'],pipeline_cache_hit=False,version_info=v)
 
-def feed(posts,path=None):
+def feed(posts,path=None,*,_history=None,_records=None):
     path=path or active_path();latest={}
-    for r in history(path):latest.setdefault(r['post_id'],r)
-    records=get_decisions([latest[p['post_id']]['decision_id'] for p in posts if p['post_id'] in latest],path)
+    for r in (history(path) if _history is None else _history):latest.setdefault(r['post_id'],r)
+    records=_records if _records is not None else get_decisions([latest[p['post_id']]['decision_id'] for p in posts if p['post_id'] in latest],path)
     rows=[]
     for post in posts:
         r=latest.get(post['post_id']);record=records[r['decision_id']] if r else None
@@ -110,19 +110,24 @@ def feed(posts,path=None):
 
 def all_feed(posts,path=None):
     path=path or active_path();known={r['post_id'] for r in posts};custom=[]
+    runs=history(path)
+    latest={}
+    for r in runs:latest.setdefault(r['post_id'],r)
+    records=get_decisions([r['decision_id'] for r in latest.values()],path)
     unknown=[]
-    for r in history(path):
+    for r in runs:
         if r['post_id'] in known:continue
         known.add(r['post_id']);unknown.append(r)
-    records=get_decisions([r['decision_id'] for r in unknown],path)
     for r in unknown:
         p=records[r['decision_id']]['pipeline']
         custom.append(dict(post_id=r['post_id'],text=p['customer_post'],source='custom submission',language_hint='Unknown',original_timestamp=None,presentation_timestamp=None))
-    return feed(posts+custom,path)
+    return feed(posts+custom,path,_history=runs,_records=records)
 
-def analytics(rows,path=None):
+def analytics(rows,path=None,*,include_cache_hits=True):
     from collections import Counter
     processed=[r for r in rows if r['decision_id']]
-    path=path or active_path()
-    with db(path) as conn:hits=conn.execute('SELECT count(*) FROM demo_cache_hits').fetchone()[0]
+    hits=0
+    if include_cache_hits:
+        path=path or active_path()
+        with db(path) as conn:hits=conn.execute('SELECT count(*) FROM demo_cache_hits').fetchone()[0]
     return dict(available=len(rows),analyzed=len(processed),unprocessed=len(rows)-len(processed),failed_or_incomplete=sum(not r['complete'] for r in processed),cache_hits=hits,ml_available=sum(r['spread_probability'] is not None for r in processed),high_spread=sum(r['high_spread'] is True for r in processed),safety_escalations=sum(r['action']=='URGENT_ESCALATION' for r in processed),pending_review=sum(r['review_status']=='PENDING_REVIEW' for r in processed),review_queue=sum(r['review_status'] in {'PENDING_REVIEW','EDITED','ESCALATED'} for r in processed),approved=sum(r['review_status']=='APPROVED' for r in processed),rejected=sum(r['review_status']=='REJECTED' for r in processed),edited=sum(r['review_status']=='EDITED' for r in processed),mean_latency_ms=sum(r['latency_ms'] for r in processed)/len(processed) if processed else None,sentiment=dict(Counter(r['sentiment'] for r in processed if r['sentiment'])),topic=dict(Counter(r['topic'] for r in processed if r['topic'])),urgency=dict(Counter(r['urgency'] for r in processed if r['urgency'])))

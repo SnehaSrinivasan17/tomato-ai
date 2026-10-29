@@ -67,8 +67,8 @@ def render():
     st.write(f"High spread = final simulated retweets ≥ {bundle['target']['retweet_threshold']:g}, "
         'using the training-only 90th percentile with boundary ties included.')
     st.caption(f"Training {audit['partitions']['train']['rows']:,} · Validation {audit['partitions']['validation']['rows']:,} · Test {audit['partitions']['test']['rows']:,}")
-    overview,explorer,try_it,historical=st.tabs(['Final model performance','Threshold explorer','Try It Yourself','Historical dataset report'])
-    with overview:
+    view=st.radio('Model view',['Final model performance','Threshold explorer','Try It Yourself','Historical dataset report'],horizontal=True)
+    if view=='Final model performance':
         st.subheader('Frozen final-test results')
         for columns,fields in [(st.columns(3),['precision','recall','f1']),(st.columns(3),['f2','average_precision','roc_auc'])]:
             names=dict(precision='Precision',recall='Recall',f1='F1 Score',f2='F2 Score',average_precision='PR-AUC (AP)',roc_auc='ROC-AUC')
@@ -87,7 +87,7 @@ def render():
         except (ValueError,KeyError,TypeError) as error:
             st.error('Final-model chart rendering failed: '+str(error))
             raise
-    with explorer:
+    if view=='Threshold explorer':
         st.subheader('Explore the fixed test predictions')
         st.write(f'The deployed threshold stays at {threshold:.2f}. This slider is descriptive test-set exploration; it does not change the saved model or establish a new validated threshold.')
         selected=st.slider('Exploratory probability threshold',.01,.99,float(threshold),.01)
@@ -97,24 +97,26 @@ def render():
         for column,field in zip(columns,['precision','recall','f1','f2']):
             column.metric('Exploratory '+field.upper(),f'{measured[field]:.3f}')
         st.plotly_chart(confusion(measured,'Exploratory test confusion matrix'),use_container_width=True,key='explore_confusion')
-    with try_it:
+    if view=='Try It Yourself':
         st.subheader('Author, post and observed first-hour metadata')
         features=schema['features']
         def reset():
             for feature in features:
                 st.session_state['ml15_'+feature]=int(schema['defaults'][feature])
         st.button('Reset to training defaults',on_click=reset)
-        values={}
-        columns=st.columns(3)
-        for index,feature in enumerate(features):
-            key='ml15_'+feature
-            if key not in st.session_state:
-                st.session_state[key]=int(schema['defaults'][feature])
-            bounds=schema['bounded'].get(feature)
-            with columns[index%3]:
-                values[feature]=st.number_input(feature.replace('_',' ').title(),min_value=0,
-                    max_value=int(bounds[1]) if bounds else None,step=1,key=key)
-        if st.button('Predict high-spread probability',type='primary'):
+        with st.form('ml_prediction_inputs'):
+            values={}
+            columns=st.columns(3)
+            for index,feature in enumerate(features):
+                key='ml15_'+feature
+                if key not in st.session_state:
+                    st.session_state[key]=int(schema['defaults'][feature])
+                bounds=schema['bounded'].get(feature)
+                with columns[index%3]:
+                    values[feature]=st.number_input(feature.replace('_',' ').title(),min_value=0,
+                        max_value=int(bounds[1]) if bounds else None,step=1,key=key)
+            submitted=st.form_submit_button('Predict high-spread probability',type='primary')
+        if submitted:
             result=predictor.predict(values)
             st.metric('Probability of synthetic high-spread class',f"{result['probability']:.1%}")
             st.write('Classification:', 'High spread' if result['high_spread'] else 'Ordinary spread')
@@ -129,7 +131,7 @@ def render():
             fig=go.Figure(go.Bar(x=effects.difference.astype(float).tolist(),y=effects.feature.tolist(),orientation='h'))
             st.plotly_chart(layout(fig,'Local sensitivity: replace one input with its training median','Probability difference','Feature'),use_container_width=True,key='local_sensitivity')
             st.caption('One-feature median replacements are sensitivity comparisons, not additive or causal contributions.')
-    with historical:
+    if view=='Historical dataset report':
         st.subheader('Historical original-post data · retained report')
         path=ROOT/'artifacts/ml/data_report.json'
         if path.exists():
